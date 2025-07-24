@@ -1,31 +1,31 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.services.obterArquivos import iniciar_arquivos
 from app.api.endpoints import estados, cidades
 
-
-
-
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Código de inicialização (startup)
     iniciar_arquivos()
-
-    
     yield
-
-
-    # Código de finalização (shutdown)
-
+    # Código de encerramento (shutdown), se quiser
+    # ex: limpar arquivos temporários
+    # limpar_arquivos_temporarios()
     
-    
-    
-    
-app = FastAPI(lifespan= lifespan)
+app = FastAPI(lifespan=lifespan)
 
+# Adicionando o middleware CORS corretamente
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permite todas as origens, cuidado com segurança em produção
+    allow_credentials=True,
+    allow_methods=["*"],  # Permite todos os métodos HTTP (GET, POST, etc.)
+    allow_headers=["*"],  # Permite todos os cabeçalhos
+)
 
 # Inclui os roteadores
 app.include_router(estados.router)
 app.include_router(cidades.router)
+
