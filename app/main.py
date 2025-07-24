@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
-from app.services.obterCidadesEstados.obterArquivo import baixarArquivoCidadesEstados
+from app.services.obterArquivos import iniciar_arquivos
 from app.api.endpoints import estados, cidades
 
 
@@ -11,11 +11,17 @@ from app.api.endpoints import estados, cidades
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Código de inicialização (startup)
-    baixarArquivoCidadesEstados()
+    iniciar_arquivos()
+
+    
     yield
-    # Código de encerramento (shutdown), se quiser
-    # ex: limpar arquivos temporários
-    # limpar_arquivos_temporarios()
+
+
+    # Código de finalização (shutdown)
+
+    
+    
+    
     
 app = FastAPI(lifespan= lifespan)
 

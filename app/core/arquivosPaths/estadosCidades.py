@@ -1,4 +1,4 @@
-from .basePath import BASE_DIR, DATA_DIR, DOWNLOAD_DIR, EXTRACT_DIR
+from .basePath import BASE_DIR, DATA_DIR, DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE
 
 
 
@@ -7,15 +7,15 @@ URL_DOWNLOAD = "https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_t
 
 
 
-# processamento do arquivo
+# processamento do arquivo (dir e files)
 SUB_DIR = "estadosCidades"
 
 # download
-ZIP_DIR = DOWNLOAD_DIR / SUB_DIR
+ZIP_DIR = DOWNLOAD_DIR_BASE / SUB_DIR
 ZIP_FILE = ZIP_DIR / "DTB_2024.zip"
 
 # extraido
-EXTRACT_DIR = EXTRACT_DIR / SUB_DIR
+EXTRACT_DIR = EXTRACT_DIR_BASE / SUB_DIR
 EXTRACT_FILE = EXTRACT_DIR / "RELATORIO_DTB_BRASIL_2024_MUNICIPIOS.ods"
 
 # salvo o arquivo final
