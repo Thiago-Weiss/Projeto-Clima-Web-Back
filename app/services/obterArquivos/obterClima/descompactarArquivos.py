@@ -1,4 +1,4 @@
-import os
+from os import makedirs, path
 import zipfile
 from concurrent.futures import ThreadPoolExecutor
 import shutil
@@ -13,19 +13,19 @@ def descompactar_arquivos(arquivosParaExtrair : Queue, arquivosParaTratar : Queu
     # deszipa os arquivo
     def descompactar_arquivo(arquivo):
         ano, zipPath = arquivo
-        dir = os.path.join(EXTRACT_DIR, str(ano))
-        os.makedirs(dir, exist_ok=True)
+        dir = path.join(EXTRACT_DIR, str(ano))
+        makedirs(dir, exist_ok=True)
 
         # desizpa o arquivo e salva tudo em uma pasta de nome {ano} dentro da pasta de extraidos
         with zipfile.ZipFile(zipPath, 'r') as zip_ref:
             for member in zip_ref.infolist():
 
-                filename = os.path.basename(member.filename)
+                filename = path.basename(member.filename)
                 if not filename:
                     # iginora as pastas
                     continue
                 source = zip_ref.open(member)
-                target_path = os.path.join(dir, filename)
+                target_path = path.join(dir, filename)
                 with open(target_path, "wb") as target:
                     shutil.copyfileobj(source, target)
 

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.services.obterArquivos import iniciar_arquivos
-from app.api.endpoints import estados, cidades
+from app.api.endpoints import estados, cidades, grafico
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -28,4 +28,5 @@ app.add_middleware(
 # Inclui os roteadores
 app.include_router(estados.router)
 app.include_router(cidades.router)
+app.include_router(grafico.router)
 

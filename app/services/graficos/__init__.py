@@ -1,0 +1,1 @@
+from .gerarDadosGrafico import gerar_dados_grafico

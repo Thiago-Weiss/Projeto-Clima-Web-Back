@@ -1,4 +1,4 @@
-import os
+from os import makedirs, path, listdir
 import pandas as pd
 from concurrent.futures import ProcessPoolExecutor
 import numpy as np 
@@ -149,14 +149,14 @@ def validar_df_nao_vazios(df: pd.DataFrame, csvPath):
 def processar_csv(dir):
     ano, pasta = dir
     # faz uma lista de todos os csv
-    arquivosCSVs = [os.path.join(pasta, f) for f in os.listdir(pasta) if f.lower().endswith(".csv")]
+    arquivosCSVs = [path.join(pasta, f) for f in listdir(pasta) if f.lower().endswith(".csv")]
 
     # faz o dir de saida
-    os.makedirs(os.path.join(OUTPUT_DIR, str(ano)), exist_ok=True)
+    makedirs(path.join(OUTPUT_DIR, str(ano)), exist_ok=True)
     
     # faz o path do index
-    indexPath = os.path.join(INDEX_DIR, f"index{ano}.parquet")
-    os.makedirs(os.path.dirname(indexPath), exist_ok=True)
+    indexPath = path.join(INDEX_DIR, f"index{ano}.parquet")
+    makedirs(path.dirname(indexPath), exist_ok=True)
 
 
     # o dados do index
@@ -208,7 +208,7 @@ def processar_csv(dir):
             # salvar o dados
             # Cria nome do arquivo parquet
             nome = f"{ano}_LA{int(float(latitude))}_LO{int(float(longitude))}_{codigo}.parquet"
-            parquet_path = os.path.join(OUTPUT_DIR, str(ano), nome)
+            parquet_path = path.join(OUTPUT_DIR, str(ano), nome)
 
             df.to_parquet(parquet_path, index=False)
 

@@ -1,4 +1,4 @@
-import os
+from os import makedirs, path
 import requests
 import zipfile
 import pandas as pd
@@ -12,19 +12,19 @@ from app.core.arquivosPaths.estadosCidades import *
 def baixarArquivoCidadesEstados():
 
     # garante que as pastas existem
-    os.makedirs(ZIP_DIR, exist_ok=True)
-    os.makedirs(EXTRACT_DIR, exist_ok=True)
-    os.makedirs(PARQUET_DIR, exist_ok=True)
+    makedirs(ZIP_DIR, exist_ok=True)
+    makedirs(EXTRACT_DIR, exist_ok=True)
+    makedirs(PARQUET_DIR, exist_ok=True)
 
 
     # se nao tem o arquivo final
-    if not os.path.exists(PARQUET_FILE):
+    if not path.exists(PARQUET_FILE):
 
         # se nao tem o extraido "desipado"
-        if not os.path.exists(EXTRACT_FILE):
+        if not path.exists(EXTRACT_FILE):
 
             # se nao tem o arquivo baixado
-            if not os.path.exists(ZIP_FILE):
+            if not path.exists(ZIP_FILE):
 
                 response = requests.get(URL_DOWNLOAD)
                 with open(ZIP_FILE, "wb") as f:

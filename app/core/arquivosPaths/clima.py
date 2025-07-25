@@ -1,4 +1,3 @@
-import os
 from datetime import datetime
 from .basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE, PROCESSADOS_DIR_BASE
 

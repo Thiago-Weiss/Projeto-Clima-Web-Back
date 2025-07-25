@@ -1,0 +1,22 @@
+from enum import Enum
+
+class ColunaClima(Enum):
+    DATA                = "data"
+    HORA                = "hora"
+    PRECIPITACAO        = "precipitacao"
+    PRESSAO             = "pressao"
+    PRESSAO_MAX         = "pressao_max"
+    PRESSAO_MIN         = "pressao_min"
+    RADIACAO            = "radiacao"
+    TEMP_AR             = "temp_ar"
+    TEMP_ORVALHO        = "temp_orvalho"
+    TEMP_MAX            = "temp_max"
+    TEMP_MIN            = "temp_min"
+    ORVALHO_MAX         = "orvalho_max"
+    ORVALHO_MIN         = "orvalho_min"
+    UMIDADE_MAX         = "umidade_max"
+    UMIDADE_MIN         = "umidade_min"
+    UMIDADE             = "umidade"
+    VENTO_DIRECAO       = "vento_direcao"
+    VENTO_RAJADA        = "vento_rajada"
+    VENTO_VELOCIDADE    = "vento_velocidade"

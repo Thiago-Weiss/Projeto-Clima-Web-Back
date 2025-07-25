@@ -1,4 +1,4 @@
-import os
+from os import listdir, path, makedirs
 from queue import Queue
 
 # meus arquivos
@@ -10,26 +10,26 @@ from app.core.arquivosPaths.index import INDEX_DIR
 
 
 
-os.makedirs(ZIP_DIR, exist_ok=True)
-os.makedirs(EXTRACT_DIR, exist_ok=True)
-os.makedirs(PARQUET_DIR, exist_ok=True)
+makedirs(ZIP_DIR, exist_ok=True)
+makedirs(EXTRACT_DIR, exist_ok=True)
+makedirs(PARQUET_DIR, exist_ok=True)
 
 
 
 def verificar_arquivos(arquivosParaBaixar : list, arquivosParaExtrair : Queue, arquivosParaTratar : Queue):
     def contar_arquivos(diretorio):
-        if os.path.exists(diretorio) and os.path.isdir(diretorio):
-            return len([f for f in os.listdir(diretorio) if os.path.isfile(os.path.join(diretorio, f))])
+        if path.exists(diretorio) and path.isdir(diretorio):
+            return len([f for f in listdir(diretorio) if path.isfile(path.join(diretorio, f))])
         return 0
 
     for ano in range(ANO_INICIO, ANO_FINAL + 1):
-        zipAnoFile = os.path.join(ZIP_DIR, f"{ano}.zip")
-        extraidosAnoDir = os.path.join(EXTRACT_DIR, str(ano))
-        indexAnoFile = os.path.join(INDEX_DIR, f"index{ano}.parquet")
-        parquetAnoDir = os.path.join(PARQUET_DIR, str(ano))
+        zipAnoFile = path.join(ZIP_DIR, f"{ano}.zip")
+        extraidosAnoDir = path.join(EXTRACT_DIR, str(ano))
+        indexAnoFile = path.join(INDEX_DIR, f"index{ano}.parquet")
+        parquetAnoDir = path.join(PARQUET_DIR, str(ano))
 
         # se nao tiver os arquivos na pasta parquet
-        if not os.path.exists(indexAnoFile) or contar_arquivos(parquetAnoDir) < 4:
+        if not path.exists(indexAnoFile) or contar_arquivos(parquetAnoDir) < 4:
         # verifica os arquivos na pasta de arquivos extraidos
         
             # tem os arquivos extraidos e falta tratar
@@ -41,7 +41,7 @@ def verificar_arquivos(arquivosParaBaixar : list, arquivosParaExtrair : Queue, a
             elif contar_arquivos(extraidosAnoDir) < 4:
             # verifica se tem o arquivo zip baixado
                 # tem o arquivo zip baixado 
-                if os.path.exists(zipAnoFile):
+                if path.exists(zipAnoFile):
                     # coloca na fila para extrair
                     arquivosParaExtrair.put((ano, zipAnoFile))
 

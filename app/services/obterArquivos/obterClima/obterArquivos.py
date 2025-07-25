@@ -1,4 +1,4 @@
-import os
+from os import cpu_count
 from threading import Thread
 from queue import Queue
 import time
@@ -23,7 +23,7 @@ def iniciar_arquivos():
     verificar_arquivos(arquivosParaBaixar, arquivosParaExtrair, arquivosParaTratar)
     t1 = Thread(target= baixar_arquivos, args=(arquivosParaBaixar, arquivosParaExtrair, 2,), daemon= True)
     t2 = Thread(target= descompactar_arquivos, args=(arquivosParaExtrair, arquivosParaTratar, 2,), daemon= True)
-    t3 = Thread(target= processar_csvs, args=(arquivosParaTratar, max(1, os.cpu_count() - 5),), daemon= True)
+    t3 = Thread(target= processar_csvs, args=(arquivosParaTratar, max(1, cpu_count() - 5),), daemon= True)
     t4 = Thread(target= baixarArquivoCidadesEstados, daemon= True)
 
     t1.start()
