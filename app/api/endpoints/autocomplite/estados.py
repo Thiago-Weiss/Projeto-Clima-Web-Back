@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 import pandas as pd
 
-from app.core.arquivosPaths.estadosCidades import PARQUET_FILE, COLUNA_ESTADO
+from app.core.const.estadosCidades import PARQUET_FILE, COLUNA_ESTADO
 
 router = APIRouter()
 

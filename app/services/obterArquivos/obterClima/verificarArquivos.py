@@ -2,8 +2,8 @@ from os import listdir, path, makedirs
 from queue import Queue
 
 # meus arquivos
-from app.core.arquivosPaths.clima import ZIP_DIR, EXTRACT_DIR, PARQUET_DIR, ANO_INICIO, ANO_FINAL, URL_DOWNLOAD
-from app.core.arquivosPaths.index import INDEX_DIR
+from app.core.const.clima import ZIP_DIR, EXTRACT_DIR, PARQUET_DIR, ANO_INICIO, ANO_FINAL, URL_DOWNLOAD
+from app.core.const.index import INDEX_DIR
 
 
 

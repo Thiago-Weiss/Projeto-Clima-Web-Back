@@ -1,11 +1,14 @@
 from enum import Enum
 
-class FiltroGrafico(Enum):
-    MAX_DIA = 0
-    MIN_DIA = 1
-    SUM_DIA = 2
-    MEAN_DIA = 3
-    HORA_FIXA = 4
-    HORA_MIN_JANELA = 5
-    HORA_MAX_JANELA = 6
-    HORA_MEAN_JANELA = 7
+
+class FiltroGraficoAgrupamento(str, Enum):
+    MAX_DIA             = "max_dia"
+    MIN_DIA             = "min_dia"
+    SUM_DIA             = "sum_dia"
+    MEAN_DIA            = "mean_dia"
+    HORA_FIXA           = "hora_fixa"
+    HORA_MIN_JANELA     = "hora_min_janela"
+    HORA_MAX_JANELA     = "hora_max_janela"
+    HORA_MEAN_JANELA    = "hora_mean_janela"
+    VARIACAO            = "variacao"
+    VARIACAO_JANELA     = "variacao_janela"

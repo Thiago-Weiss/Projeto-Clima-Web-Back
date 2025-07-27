@@ -4,8 +4,8 @@ import pandas as pd
 
 
 from app.core.dataclass import EstacaoInfo, GraficoColunaConfig
-from app.core.arquivosPaths.clima import HORA, DATA
-from app.core.enums import FiltroGrafico
+from app.core.const.clima import HORA, DATA
+from app.core.enums import FiltroGraficoAgrupamento
 
 
 def gerar_data_frame(
@@ -49,33 +49,33 @@ def gerar_data_frame(
             df_temp = df[[DATA, HORA, coluna]].copy()
 
             match filtro:
-                case FiltroGrafico.MAX_DIA:
+                case FiltroGraficoAgrupamento.MAX_DIA:
                     agg = df_temp.groupby(DATA)[coluna].max().rename(coluna)
 
-                case FiltroGrafico.MIN_DIA:
+                case FiltroGraficoAgrupamento.MIN_DIA:
                     agg = df_temp.groupby(DATA)[coluna].min().rename(coluna)
 
-                case FiltroGrafico.MEAN_DIA:
+                case FiltroGraficoAgrupamento.MEAN_DIA:
                     agg = df_temp.groupby(DATA)[coluna].mean().rename(coluna)
 
-                case FiltroGrafico.SUM_DIA:
+                case FiltroGraficoAgrupamento.SUM_DIA:
                     agg = df_temp.groupby(DATA)[coluna].sum().rename(coluna)
 
-                case FiltroGrafico.HORA_FIXA:
+                case FiltroGraficoAgrupamento.HORA_FIXA:
                     df_temp = df_temp[df_temp[HORA] == hora_fixa]
                     agg = df_temp.set_index(DATA)[coluna]
 
-                case FiltroGrafico.HORA_MIN_JANELA:
+                case FiltroGraficoAgrupamento.HORA_MIN_JANELA:
                     ini, fim = janela_horas
                     df_temp = df_temp[(df_temp[HORA] >= ini) & (df_temp[HORA] <= fim)]
                     agg = df_temp.groupby(DATA)[coluna].min().rename(coluna)
 
-                case FiltroGrafico.HORA_MAX_JANELA:
+                case FiltroGraficoAgrupamento.HORA_MAX_JANELA:
                     ini, fim = janela_horas
                     df_temp = df_temp[(df_temp[HORA] >= ini) & (df_temp[HORA] <= fim)]
                     agg = df_temp.groupby(DATA)[coluna].max().rename(coluna)
 
-                case FiltroGrafico.HORA_MEAN_JANELA:
+                case FiltroGraficoAgrupamento.HORA_MEAN_JANELA:
                     ini, fim = janela_horas
                     df_temp = df_temp[(df_temp[HORA] >= ini) & (df_temp[HORA] <= fim)]
                     agg = df_temp.groupby(DATA)[coluna].mean().rename(coluna)

@@ -1,7 +1,7 @@
 from os import path
 import pandas as pd
 
-from app.core.arquivosPaths.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA
+from app.core.const.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA
 from app.core.utils.calcularDistanciaDirecao.calcular import calcular_distancia_direcao
 from app.core.dataclass import EstacaoInfo
 

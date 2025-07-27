@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import shutil
 from queue import Queue
 
-from app.core.arquivosPaths.clima import EXTRACT_DIR
+from app.core.const.clima import EXTRACT_DIR
 
 
 

@@ -5,7 +5,7 @@ import pandas as pd
 import shutil
 
 # meus arquivos
-from app.core.arquivosPaths.estadosCidades import *
+from app.core.const.estadosCidades import *
 
 
 

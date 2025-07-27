@@ -4,8 +4,8 @@ from concurrent.futures import ProcessPoolExecutor
 import numpy as np 
 from queue import Queue
 
-from app.core.arquivosPaths.clima import *
-from app.core.arquivosPaths.index import *
+from app.core.const.clima import *
+from app.core.const.index import *
 
 
 

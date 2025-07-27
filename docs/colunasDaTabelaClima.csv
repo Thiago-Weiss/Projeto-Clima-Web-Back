@@ -1,0 +1,123 @@
+﻿
+estrutura desse arquivo
+<nome na tabela original> sem importancia para o front
+<"nome no "banco de dados""> IMPORTANTE para o front quando for mandar requisiçoes para o back
+<descricao> para o front end mostrar para o usuario
+<exmplo> se tiver um exemplo
+
+essas sao de uso interno mas podem servir pra resposta de requisicoes
+DATA                = "data"
+HORA                = "hora"
+
+🌧 PRECIPITAÇÃO TOTAL, HORÁRIA (mm)
+"precipitacao"
+Quantidade de chuva medida no período de 1 hora, em milímetros.
+Ex.: Se o valor for 5.0 mm, significa que choveu 5 litros de água por metro quadrado naquela hora.
+
+
+🌬 PRESSÃO ATMOSFÉRICA AO NÍVEL DA ESTAÇÃO, HORÁRIA (mB ou hPa)
+"pressao"
+Medida da pressão do ar na altitude onde a estação está localizada.
+Unidade: milibar (mB) ou hectopascal (hPa) (1 mB = 1 hPa).
+
+
+📈 PRESSÃO ATMOSFÉRICA MÁX. NA HORA ANT. (AUT) (mB)
+"pressao_max"
+A maior pressão atmosférica registrada pela estação na hora anterior.
+
+
+📉 PRESSÃO ATMOSFÉRICA MÍN. NA HORA ANT. (AUT) (mB)
+"pressao_min"
+A menor pressão atmosférica registrada pela estação na hora anterior.
+
+
+☀ RADIAÇÃO GLOBAL (KJ/m²)
+"radiacao"
+Quantidade de energia solar recebida por metro quadrado, medida em quilojoules por metro quadrado.
+Indica a intensidade da luz solar e é útil para estudos de clima, agricultura e energia solar.
+
+
+🌡 TEMPERATURA DO AR – BULBO SECO, HORÁRIA (°C)
+"temp_ar"
+A temperatura do ar “normal” registrada no abrigo meteorológico.
+É a temperatura padrão que vemos em previsões do tempo.
+
+
+💧 TEMPERATURA DO PONTO DE ORVALHO (°C)
+"temp_orvalho"
+Temperatura em que o ar se torna saturado de umidade (100% de umidade relativa) e o orvalho começa a se formar.
+Quanto mais próxima do bulbo seco, mais úmido está o ar.
+
+
+🌡 TEMPERATURA MÁXIMA NA HORA ANT. (AUT) (°C)
+"temp_max"
+A maior temperatura registrada pela estação na hora anterior.
+
+
+🌡 TEMPERATURA MÍNIMA NA HORA ANT. (AUT) (°C)
+"temp_min"
+A menor temperatura registrada pela estação na hora anterior.
+
+
+💧 TEMPERATURA ORVALHO MÁX. NA HORA ANT. (AUT) (°C)
+"orvalho_max"
+O maior ponto de orvalho registrado pela estação na hora anterior.
+
+
+💧 TEMPERATURA ORVALHO MIN. NA HORA ANT. (AUT) (°C)
+"orvalho_min"
+O menor ponto de orvalho registrado pela estação na hora anterior.
+
+
+💦 UMIDADE REL. MÁX. NA HORA ANT. (AUT) (%)
+"umidade_max"
+A maior umidade relativa registrada na hora anterior.
+
+
+💦 UMIDADE REL. MÍN. NA HORA ANT. (AUT) (%)
+"umidade_min"
+A menor umidade relativa registrada na hora anterior.
+
+
+💦 UMIDADE RELATIVA DO AR, HORÁRIA (%)
+"umidade"
+Percentual de umidade do ar naquele momento (quanto mais próximo de 100%, mais úmido).
+
+
+🧭 VENTO, DIREÇÃO HORÁRIA (°)
+"vento_direcao"
+A direção de onde o vento vem, em graus (0° ou 360° = Norte, 90° = Leste, 180° = Sul, 270° = Oeste).
+
+
+🌬 VENTO, RAJADA MÁXIMA (m/s)
+"vento_rajada"
+Velocidade da maior rajada de vento registrada na última hora.
+
+
+🌬 VENTO, VELOCIDADE HORÁRIA (m/s)
+"vento_velocidade"
+Velocidade média do vento naquela hora.
+
+
+
+
+todas as constantes
+DATA                = "data"
+HORA                = "hora"
+PRECIPITACAO        = "precipitacao"
+PRESSAO             = "pressao"
+PRESSAO_MAX         = "pressao_max"
+PRESSAO_MIN         = "pressao_min"
+RADIACAO            = "radiacao"
+TEMP_AR             = "temp_ar"
+TEMP_ORVALHO        = "temp_orvalho"
+TEMP_MAX            = "temp_max"
+TEMP_MIN            = "temp_min"
+ORVALHO_MAX         = "orvalho_max"
+ORVALHO_MIN         = "orvalho_min"
+UMIDADE_MAX         = "umidade_max"
+UMIDADE_MIN         = "umidade_min"
+UMIDADE             = "umidade"
+VENTO_DIRECAO       = "vento_direcao"
+VENTO_RAJADA        = "vento_rajada"
+VENTO_VELOCIDADE    = "vento_velocidade"

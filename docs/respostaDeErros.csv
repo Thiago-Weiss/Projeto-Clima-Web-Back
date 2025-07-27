@@ -1,0 +1,21 @@
+respostas de erro do back para o front
+
+como o back ira responder se tiver um erro interno na hora de processar os dados
+exp.: se for pedido um grafico e os parametos estiverem errados como data no formato errado o FastApi cuidara da maior parte disso
+usando a propria validacao dele, mas se todos os parametos estao certos e na hora de gerar o grafico nao tem dados pra pra aquela regiao e periodo 
+entao o back respodera com 200 OK pra requisicao mas mandara uma mensagem em formato string para informar o erro
+
+erros
+"sem dados para o periodo consultado"
+
+
+
+
+
+
+
+
+
+
+
+

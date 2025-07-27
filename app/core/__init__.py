@@ -1,1 +1,1 @@
-from .arquivosPaths import estadosCidades
+from .const import estadosCidades
