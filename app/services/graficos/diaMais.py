@@ -55,8 +55,8 @@ def gerar_dados_grafico_dia_mais(estado: str, cidade: str, data_inicio: date, da
     data_max = df.loc[df[config.coluna.value].idxmax(), DATA]
 
     # pega uma margem de dias antes e depois
-    dt_inicio = data_max - pd.Timedelta(days=1)
-    dt_fim = data_max + pd.Timedelta(days=1)
+    dt_inicio = data_max - pd.Timedelta(days= dias_marge)
+    dt_fim = data_max + pd.Timedelta(days= dias_marge)
     arquivo_paths = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
     
     # gera o novo data frame dos dias certos sem agrupar o dia
