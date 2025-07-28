@@ -11,6 +11,7 @@ from .descompactarArquivos import descompactar_arquivos
 from .processarArquivos import processar_csvs
 from app.services.obterDataBase.obterCidadesEstados import baixarArquivoCidadesEstados
 
+from app.core.const.basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE
 
 def iniciar_arquivos():
     start = time.time()
@@ -37,9 +38,9 @@ def iniciar_arquivos():
     t4.join()
 
 
-    if False:
-        shutil.rmtree(DOWNLOAD_DIR)
-        shutil.rmtree(EXTRACT_DIR)
+    if True:
+        shutil.rmtree(DOWNLOAD_DIR_BASE)
+        shutil.rmtree(EXTRACT_DIR_BASE)
 
 
     print(f"Tempo total de execução: {time.time() - start:4f} segundos")
