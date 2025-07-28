@@ -12,3 +12,12 @@ def converter_df_para_list(df : pd.DataFrame, dataToStr : bool = True) -> list:
 
     resultado = [df_copy.columns.tolist()] + df_copy.values.tolist()
     return resultado
+
+
+
+# converte o data frame para um obj parecido com json
+def converter_df_para_objeto(df : pd.DataFrame) -> list:
+    df_copy = df.copy()
+    df_copy[DATA] = df_copy[DATA].dt.strftime('%d-%m-%Y')
+    resultado = df_copy.to_dict(orient="records")
+    return resultado
