@@ -9,7 +9,7 @@ from .verificarArquivos import verificar_arquivos
 from .baixarArquivos import baixar_arquivos
 from .descompactarArquivos import descompactar_arquivos
 from .processarArquivos import processar_csvs
-from app.services.obterArquivos.obterCidadesEstados import baixarArquivoCidadesEstados
+from app.services.obterDataBase.obterCidadesEstados import baixarArquivoCidadesEstados
 
 
 def iniciar_arquivos():

@@ -1,19 +1,13 @@
 import pandas as pd
 from datetime import date
 
-
-from app.core.utils import obter_lat_lon, obter_paths_por_cord_ano
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_list
+from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento
 from app.core.const.clima import COLUNAS_PADRAO, DATA
-from app.core.utils.gerarDataFrame.gerar import gerar_data_frame
-from app.core.utils.gerarDataFrame.gerarDia import gerar_data_frame_dia
-
-from app.core.dataclass import GraficoColunaConfig
-from app.core.enums import ColunaClima, FiltroGraficoAgrupamento
 
 
 
-
-def gerar_dados_dia_grafico(estado: str, cidade: str, data_inicio: date, data_fim: date, coluna: str) -> dict:
+def gerar_dados_grafico_dia_mais(estado: str, cidade: str, data_inicio: date, data_fim: date, coluna: str, dias_marge : int = 1) -> dict:
     
     # valida a localizacao
     latitude, longitude = obter_lat_lon(cidade= cidade, estado= estado)
@@ -40,7 +34,6 @@ def gerar_dados_dia_grafico(estado: str, cidade: str, data_inicio: date, data_fi
     if not arquivo_paths:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
-    # coluna de testes 
     config = GraficoColunaConfig(
         coluna=ColunaClima.PRECIPITACAO,     
         filtro=FiltroGraficoAgrupamento.SUM_DIA,        
@@ -49,24 +42,25 @@ def gerar_dados_dia_grafico(estado: str, cidade: str, data_inicio: date, data_fi
     )
     coluna_teste = [config]
 
-    
-    # gera o dataframe de todo o periodo com os dados 
+
+    # gera o dataframe 
     df = gerar_data_frame(arquivo_paths, coluna_teste, dt_inicio, dt_fim)
     if df is None or df.empty:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
+
     
 
+    # filtra pelo dia mais 
     df[DATA] = pd.to_datetime(df[DATA]) 
     data_max = df.loc[df[config.coluna.value].idxmax(), DATA]
 
+    # pega uma margem de dias antes e depois
     dt_inicio = data_max - pd.Timedelta(days=1)
     dt_fim = data_max + pd.Timedelta(days=1)
     arquivo_paths = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
     
-    df = gerar_data_frame_dia(arquivo_paths, coluna_teste, dt_inicio, dt_fim)
+    # gera o novo data frame dos dias certos sem agrupar o dia
+    df = gerar_data_frame(arquivo_paths, coluna_teste, dt_inicio, dt_fim, False)
 
-    df_copy = df.copy()
-    df_copy[DATA] = df_copy[DATA].dt.strftime('%Y-%m-%d')
+    return converter_df_para_list(df)
 
-
-    return df_copy.values.tolist()

@@ -2,23 +2,26 @@ from os import path
 import pandas as pd
 
 from app.core.const.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA
-from app.core.utils.calcularDistanciaDirecao.calcular import calcular_distancia_direcao
-from app.core.dataclass import EstacaoInfo
+from app.services.graficos.utils import calcular_distancia_direcao, abrir_data_frame
+from app.core import EstacaoInfo
 
-def obter_paths_por_cord_ano(latitude : float, longitude : float, ano_inicio : int, ano_fim : int, distancia_max : float = 50) -> list[EstacaoInfo] | None:
+def obter_paths_por_cord_ano(
+        latitude : float,
+        longitude : float, 
+        ano_inicio : int, 
+        ano_fim : int, 
+        distancia_max : float = 50) -> list[EstacaoInfo] | None:
 
     resultados = []
     for ano in range(ano_inicio, ano_fim + 1):
-        indexPath = path.join(INDEX_DIR, f"index{ano}.parquet")
-        
-        # verifica se o path existe
-        if not path.exists(indexPath):
-            continue
-
-
-        # abre o arquivo
+        # dados do arquivo
+        arquivo = path.join(INDEX_DIR, f"index{ano}.parquet")
         colunas = [LATITUDE, LONGITUDE, ARQUIVO, ESTACAO]
-        df = pd.read_parquet(indexPath, columns= colunas)
+        
+        # abre o arquivo
+        df =  abrir_data_frame(arquivo, colunas)
+        if df is None:
+            continue
 
 
         # Calcula a distância para todas as estações
@@ -26,9 +29,9 @@ def obter_paths_por_cord_ano(latitude : float, longitude : float, ano_inicio : i
             lambda row: pd.Series(calcular_distancia_direcao(latitude, longitude, row[LATITUDE], row[LONGITUDE])[0]),
             axis=1
         )
-
         # Filtra estações dentro da distância máxima
         df_filtrado = df[df[DISTANCIA] <= distancia_max]
+
 
         # vai para o proximo ano se nao tiver achado a estacao
         if df_filtrado.empty:

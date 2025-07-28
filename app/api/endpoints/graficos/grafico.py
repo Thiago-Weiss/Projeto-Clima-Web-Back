@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from datetime import date
-from app.services.graficos import gerar_dados_grafico, gerar_dados_dia_grafico
-from app.core.enums import Estados
+from app.services.graficos import gerar_dados_grafico, gerar_dados_grafico_dia_mais
+from app.core import Estados
 
 
 router = APIRouter()
@@ -39,16 +39,19 @@ def obter_dados_grafico(
     cidade: str = Query(...),
     data_inicio: date = Query(default= "2000-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date = Query(default= date.today(), description= "Data no formato YYYY-MM-DD"),
-    coluna: str = Query(...)
+    coluna: str = Query(...),
+    dias_marge : int = Query(default= 1, description= "Quantos dias antes e depois do dia mais vai retornar junto", ge= 1, le= 7)
 ):
     try:
-        resultado = gerar_dados_dia_grafico(
+        resultado = gerar_dados_grafico_dia_mais(
             estado= estado.value,
             cidade= cidade,
             data_inicio= data_inicio,
             data_fim= data_fim,
-            coluna= coluna
+            coluna= coluna,
+            dias_marge= dias_marge
         )
+
         return JSONResponse(content= resultado)
 
     except Exception as e:

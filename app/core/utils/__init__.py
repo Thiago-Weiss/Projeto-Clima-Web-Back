@@ -1,4 +1,0 @@
-from .obterCordenadas.cidadeEstadoParaCordenadas import obter_lat_lon
-from .obterPath.cordenadasParaPath import obter_paths_por_cord_ano
-
-

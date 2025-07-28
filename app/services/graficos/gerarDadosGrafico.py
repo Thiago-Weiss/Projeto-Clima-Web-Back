@@ -3,14 +3,9 @@ from datetime import date
 
 
 
-from app.core.utils import obter_lat_lon, obter_paths_por_cord_ano
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_list
+from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento
 from app.core.const.clima import COLUNAS_PADRAO
-from app.core.utils.gerarDataFrame.gerar import gerar_data_frame
-
-
-from app.core.dataclass import GraficoColunaConfig
-from app.core.enums import ColunaClima, FiltroGraficoAgrupamento
-from app.core.const.clima import DATA
 
 
 
@@ -49,12 +44,10 @@ def gerar_dados_grafico(estado: str, cidade: str, data_inicio: date, data_fim: d
     )
     coluna_teste = [config]
 
-    
+    # gera o dataframe 
     df = gerar_data_frame(arquivo_paths, coluna_teste, dt_inicio, dt_fim)
     if df is None or df.empty:
-        raise ValueError("Erro interno ao gerar o data frame do grafico")
-    
-    df_copy = df.copy()
-    df_copy[DATA] = df_copy[DATA].dt.strftime('%Y-%m-%d')
-    resultado = [df_copy.columns.tolist()] + df_copy.values.tolist()
-    return resultado
+        return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
+
+    return converter_df_para_list(df)
+

@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from typing import Tuple
 
-from app.core.enums import ColunaClima, FiltroGraficoAgrupamento
-
+from app.core import ColunaClima, FiltroGraficoAgrupamento
 
 
 

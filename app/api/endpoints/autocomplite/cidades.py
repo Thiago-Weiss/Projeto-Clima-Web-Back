@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 import pandas as pd
 
 from app.core.const.estadosCidades import PARQUET_FILE, COLUNA_ESTADO, COLUNA_CIDADE
-from app.core.enums import Estados
+from app.core import Estados
 
 router = APIRouter()
 

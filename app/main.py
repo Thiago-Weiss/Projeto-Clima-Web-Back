@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
-from app.services.obterArquivos import iniciar_arquivos
+from app.services.obterDataBase import iniciar_arquivos
 from app.api.endpoints import estados, cidades, grafico
 
 @asynccontextmanager
