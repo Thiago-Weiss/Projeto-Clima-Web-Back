@@ -1,9 +1,9 @@
 import pandas as pd
 from app.core.const.clima import DATA, HORA
-from app.core import FiltroGraficoAgrupamento
+from app.core import FiltroGraficoAgrupamento, GraficoColunaConfig
 
 
-def agrupar_dados_por_dia(df, grafico_coluna_config):
+def agrupar_dados_por_dia(df : pd.DataFrame, grafico_coluna_config : list[GraficoColunaConfig]):
     # cria um df_resultado só com os DIAS do ano em ordem cronologica, sem as outras colunas
     df_resultado = pd.DataFrame({DATA : df[DATA].unique()})
 
@@ -11,9 +11,9 @@ def agrupar_dados_por_dia(df, grafico_coluna_config):
     for config in grafico_coluna_config:
         #configs
         coluna = config.coluna.value
-        filtro = config.filtro
+        filtro = config.modo_agrupamento
         hora_fixa = config.hora_fixa
-        janela_horas = config.janela_horas
+        janela_horas = (config.hora_janela_inicio, config.hora_janela_fim)
 
         # copia do data frame principal com a coluna que vai ser filtrada
         df_temp = df[[DATA, HORA, coluna]].copy()

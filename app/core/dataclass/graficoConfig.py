@@ -8,7 +8,7 @@ from app.core import ColunaClima, FiltroGraficoAgrupamento
 @dataclass
 class GraficoColunaConfig:
     coluna: ColunaClima
-    filtro: FiltroGraficoAgrupamento
+    modo_agrupamento: FiltroGraficoAgrupamento
     hora_fixa: int
-    janela_horas: Tuple[int, int]
-    
+    hora_janela_inicio: int
+    hora_janela_fim: int

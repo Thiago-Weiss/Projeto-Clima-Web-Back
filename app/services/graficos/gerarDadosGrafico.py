@@ -3,13 +3,22 @@ from datetime import date
 
 
 
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_list
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_objeto, validar_grafico_coluna_config
 from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento
 from app.core.const.clima import COLUNAS_PADRAO
 
 
 
-def gerar_dados_grafico(estado: str, cidade: str, data_inicio: date, data_fim: date, coluna: str) -> dict:
+def gerar_dados_grafico(
+        estado: str, 
+        cidade: str, 
+        data_inicio: date, 
+        data_fim: date, 
+        colunas: list[ColunaClima],
+        agrupamentos: list[FiltroGraficoAgrupamento],
+        hora_fixa: list[int],
+        janela_hora_inicio: list[int],
+        janela_hora_fim: list[int]):
     
     # valida a localizacao
     latitude, longitude = obter_lat_lon(cidade= cidade, estado= estado)
@@ -17,17 +26,17 @@ def gerar_dados_grafico(estado: str, cidade: str, data_inicio: date, data_fim: d
         return f"Cordenadas nao encontrada para a cidade: {cidade} estado: {estado}"
 
 
-    # data
+    # valida data
     dt_inicio = pd.to_datetime(data_inicio)
     dt_fim = pd.to_datetime(data_fim)
     if dt_inicio > dt_fim:
         return f"Data de fim: {data_fim} maior que data de inicio: {data_inicio}"
 
 
-    # verifica se a coluna existe nas tabelas de clima
-    if not coluna in COLUNAS_PADRAO:
-        raise ValueError(f"Não existe a coluna {coluna} nas tabelas")
-
+    # valida a coluna e o modo de filtro
+    coluna_configs = validar_grafico_coluna_config(colunas, agrupamentos, hora_fixa, janela_hora_inicio, janela_hora_fim)
+    if isinstance(coluna_configs, str):
+        return coluna_configs
 
 
 
@@ -36,18 +45,10 @@ def gerar_dados_grafico(estado: str, cidade: str, data_inicio: date, data_fim: d
     if not arquivo_paths:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
-    config = GraficoColunaConfig(
-        coluna=ColunaClima.PRECIPITACAO,     
-        filtro=FiltroGraficoAgrupamento.SUM_DIA,        
-        hora_fixa=23,                        
-        janela_horas=(10, 12)                
-    )
-    coluna_teste = [config]
-
     # gera o dataframe 
-    df = gerar_data_frame(arquivo_paths, coluna_teste, dt_inicio, dt_fim)
+    df = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim)
     if df is None or df.empty:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
-    return converter_df_para_list(df)
+    return converter_df_para_objeto(df)
 

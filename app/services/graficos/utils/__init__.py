@@ -9,3 +9,5 @@ from .manipularDataFrame.gerarDataFrame import gerar_data_frame
 from .obterCordenadas.cidadeEstadoParaCordenadas import obter_lat_lon
 
 from .obterPath.cordenadasParaPath import obter_paths_por_cord_ano
+
+from .validacao.validarColunaFiltros import validar_grafico_coluna_config

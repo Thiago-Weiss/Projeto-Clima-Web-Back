@@ -19,7 +19,7 @@ def gerar_data_frame(
         # dados do arquivo
         arquivo = estacao.arquivo
         colunas = list(var.coluna.value for var in grafico_coluna_config) + [DATA, HORA]
-        
+
         # abre o arquivo
         df = abrir_data_frame(arquivo, colunas)
         if df is None:

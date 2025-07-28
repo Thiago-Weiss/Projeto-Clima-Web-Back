@@ -1,8 +1,6 @@
 from enum import Enum
 
-class ColunaClima(Enum):
-    DATA                = "data"
-    HORA                = "hora"
+class ColunaClima(str, Enum):
     PRECIPITACAO        = "precipitacao"
     PRESSAO             = "pressao"
     PRESSAO_MAX         = "pressao_max"
