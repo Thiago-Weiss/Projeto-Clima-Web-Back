@@ -12,14 +12,14 @@ router = APIRouter()
 
 @router.get("/grafico")
 def obter_dados_grafico(
-    estado: Estados     = Query(default= "Santa Catarina"),
-    cidade: str         = Query(default= "São José"),
-    data_inicio: date   = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
-    data_fim: date      = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    estado: Estados     = Query(default= "Santa Catarina", description= "OBRIGATÓRIO | "),
+    cidade: str         = Query(default= "OBRIGATÓRIO | São José"),
+    data_inicio: date   = Query(default="2023-01-01", description= "OBRIGATÓRIO | Data no formato YYYY-MM-DD"),
+    data_fim: date      = Query(default="2023-12-31", description= "OBRIGATÓRIO | Data no formato YYYY-MM-DD"),
 
     resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
 
-    colunas: list[ColunaClima]                      = Query(description= "Nomes das colunas a serem filtradas"),
+    colunas: list[ColunaClima]                      = Query(description= "OBRIGATÓRIO | Nomes das colunas a serem filtradas"),
     agrupamentos: list[FiltroGraficoAgrupamento]    = Query(default=[], description= "Modos de agrupamento por dia"),
     hora_fixa: list[int]                            = Query(default=[], description= "Hora fixa do agrupamento"),
     janela_hora_inicio: list[int]                   = Query(default=[], description= "Janela hora inicio"),
@@ -53,8 +53,8 @@ def obter_dados_grafico(
 
 @router.get("/grafico/dia-mais")
 def obter_dados_grafico(
-    estado: Estados     = Query(default= "Santa Catarina"),
-    cidade: str         = Query(default= "São José"),
+    estado: Estados     = Query(default= "OBRIGATÓRIO | Santa Catarina"),
+    cidade: str         = Query(default= "OBRIGATÓRIO | São José"),
     data_inicio: date   = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date      = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
     
@@ -62,7 +62,7 @@ def obter_dados_grafico(
     
     modo_dia: DiaMais = Query(default= "dia_max", description= "Filtro para ser usado no dia mais para o primeira coluna passada"),
     
-    colunas: list[ColunaClima]                      = Query(description= "Nomes das colunas a serem filtradas"),
+    colunas: list[ColunaClima]                      = Query(description= "OBRIGATÓRIO | Nomes das colunas a serem filtradas"),
     agrupamentos: list[FiltroGraficoAgrupamento]    = Query(default=[], description= "Modos de agrupamento por dia"),
     hora_fixa: list[int]                            = Query(default=[], description= "Hora fixa do agrupamento"),
     janela_hora_inicio: list[int]                   = Query(default=[], description= "Janela hora inicio"),
