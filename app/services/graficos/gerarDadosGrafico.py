@@ -19,7 +19,8 @@ def gerar_dados_grafico(
         agrupamentos: list[FiltroGraficoAgrupamento],
         hora_fixa: list[int],
         janela_hora_inicio: list[int],
-        janela_hora_fim: list[int]):
+        janela_hora_fim: list[int],
+        auto_completar_colunas : bool):
     
     # valida a localizacao
     latitude, longitude = obter_lat_lon(cidade= cidade, estado= estado)
@@ -35,8 +36,8 @@ def gerar_dados_grafico(
 
 
     # valida a coluna e o modo de filtro
-    coluna_configs = validar_grafico_coluna_config(colunas, agrupamentos, hora_fixa, janela_hora_inicio, janela_hora_fim)
-    if isinstance(coluna_configs, str):
+    coluna_configs = validar_grafico_coluna_config(colunas, agrupamentos, hora_fixa, janela_hora_inicio, janela_hora_fim, auto_completar_colunas)
+    if isinstance(coluna_configs[0], str):
         return coluna_configs
 
 

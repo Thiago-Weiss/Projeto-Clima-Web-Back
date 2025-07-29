@@ -12,16 +12,20 @@ router = APIRouter()
 
 @router.get("/grafico")
 def obter_dados_grafico(
-    estado: Estados = Query(default= "Santa Catarina"),
-    cidade: str = Query(default= "São José"),
-    data_inicio: date = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
-    data_fim: date = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    estado: Estados     = Query(default= "Santa Catarina"),
+    cidade: str         = Query(default= "São José"),
+    data_inicio: date   = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
+    data_fim: date      = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+
     resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
-    colunas: list[ColunaClima] = Query(default= ["precipitacao"], description= "Nomes das colunas a serem filtradas"),
-    agrupamentos: list[FiltroGraficoAgrupamento] = Query(default= ["sum_dia"], description= "Modos de agrupamento por dia"),
-    hora_fixa: list[int] = Query(default= [10], description= "Hora fixa do agrupamento"),
-    janela_hora_inicio: list[int] = Query(default= [10], description= "Janela hora inicio"),
-    janela_hora_fim: list[int] = Query(default= [18], description= "Janela hora fim"),
+
+    colunas: list[ColunaClima]                      = Query(description= "Nomes das colunas a serem filtradas"),
+    agrupamentos: list[FiltroGraficoAgrupamento]    = Query(default=[], description= "Modos de agrupamento por dia"),
+    hora_fixa: list[int]                            = Query(default=[], description= "Hora fixa do agrupamento"),
+    janela_hora_inicio: list[int]                   = Query(default=[], description= "Janela hora inicio"),
+    janela_hora_fim: list[int]                      = Query(default=[], description= "Janela hora fim"),
+
+    auto_completar_colunas : bool = Query(default= True, description= "Nao validar os parametros para as colunas e auto-completar elas"),
 ):
 
 
@@ -37,6 +41,7 @@ def obter_dados_grafico(
             hora_fixa= hora_fixa,
             janela_hora_inicio= janela_hora_inicio,
             janela_hora_fim= janela_hora_fim,
+            auto_completar_colunas = auto_completar_colunas,
         )
         return JSONResponse(content= resultado)
 
@@ -48,17 +53,23 @@ def obter_dados_grafico(
 
 @router.get("/grafico/dia-mais")
 def obter_dados_grafico(
-    estado: Estados = Query(default= "Santa Catarina"),
-    cidade: str = Query(default= "São José"),
-    data_inicio: date = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
-    data_fim: date = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    estado: Estados     = Query(default= "Santa Catarina"),
+    cidade: str         = Query(default= "São José"),
+    data_inicio: date   = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
+    data_fim: date      = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    
     resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
+    
     modo_dia: DiaMais = Query(default= "dia_max", description= "Filtro para ser usado no dia mais para o primeira coluna passada"),
-    colunas: list[ColunaClima] = Query(default= ["precipitacao"], description= "Nomes das colunas a serem filtradas"),
-    agrupamentos: list[FiltroGraficoAgrupamento] = Query(default= ["sum_dia"], description= "Modos de agrupamento por dia"),
-    hora_fixa: list[int] = Query(default= [10], description= "Hora fixa do agrupamento"),
-    janela_hora_inicio: list[int] = Query(default= [10], description= "Janela hora inicio"),
-    janela_hora_fim: list[int] = Query(default= [18], description= "Janela hora fim"),
+    
+    colunas: list[ColunaClima]                      = Query(description= "Nomes das colunas a serem filtradas"),
+    agrupamentos: list[FiltroGraficoAgrupamento]    = Query(default=[], description= "Modos de agrupamento por dia"),
+    hora_fixa: list[int]                            = Query(default=[], description= "Hora fixa do agrupamento"),
+    janela_hora_inicio: list[int]                   = Query(default=[], description= "Janela hora inicio"),
+    janela_hora_fim: list[int]                      = Query(default=[], description= "Janela hora fim"),
+
+    auto_completar_colunas : bool = Query(default= True, description= "Nao validar os parametros para as colunas e auto-completar elas"),
+    
     dias_marge : int = Query(default= 1, description= "Quantos dias antes e depois do dia mais vai retornar junto", ge= 1, le= 7)
 ):
     try:
@@ -74,6 +85,7 @@ def obter_dados_grafico(
             hora_fixa= hora_fixa,
             janela_hora_inicio= janela_hora_inicio,
             janela_hora_fim= janela_hora_fim,
+            auto_completar_colunas = auto_completar_colunas,
             dias_marge= dias_marge
         )
 
