@@ -1,3 +1,5 @@
-from .autocomplite import estados
-from .autocomplite import cidades
+from .autocomplite import estados, cidades, colunasClima
+
 from .graficos import grafico
+
+
