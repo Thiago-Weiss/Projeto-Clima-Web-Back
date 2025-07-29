@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from datetime import date
 from app.services.graficos import gerar_dados_grafico, gerar_dados_grafico_dia_mais
-from app.core import Estados, ColunaClima, FiltroGraficoAgrupamento, DiaMais
+from app.core import Estados, ColunaClima, FiltroGraficoAgrupamento, DiaMais, RespostaFormato
 
 
 
@@ -16,6 +16,7 @@ def obter_dados_grafico(
     cidade: str = Query(default= "São José"),
     data_inicio: date = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
     colunas: list[ColunaClima] = Query(default= ["precipitacao"], description= "Nomes das colunas a serem filtradas"),
     agrupamentos: list[FiltroGraficoAgrupamento] = Query(default= ["sum_dia"], description= "Modos de agrupamento por dia"),
     hora_fixa: list[int] = Query(default= [10], description= "Hora fixa do agrupamento"),
@@ -30,6 +31,7 @@ def obter_dados_grafico(
             cidade= cidade,
             data_inicio= data_inicio,
             data_fim= data_fim,
+            resposta_formato = resposta_formato,
             colunas=colunas,
             agrupamentos= agrupamentos,
             hora_fixa= hora_fixa,
@@ -50,6 +52,7 @@ def obter_dados_grafico(
     cidade: str = Query(default= "São José"),
     data_inicio: date = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
     modo_dia: DiaMais = Query(default= "dia_max", description= "Filtro para ser usado no dia mais para o primeira coluna passada"),
     colunas: list[ColunaClima] = Query(default= ["precipitacao"], description= "Nomes das colunas a serem filtradas"),
     agrupamentos: list[FiltroGraficoAgrupamento] = Query(default= ["sum_dia"], description= "Modos de agrupamento por dia"),
@@ -64,6 +67,7 @@ def obter_dados_grafico(
             cidade= cidade,
             data_inicio= data_inicio,
             data_fim= data_fim,
+            resposta_formato = resposta_formato,
             modo_dia = modo_dia,
             colunas= colunas,
             agrupamentos= agrupamentos,

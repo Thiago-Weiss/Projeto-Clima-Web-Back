@@ -3,8 +3,8 @@ from datetime import date
 
 
 
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_objeto, validar_grafico_coluna_config
-from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config
+from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento, RespostaFormato
 from app.core.const.clima import COLUNAS_PADRAO
 
 
@@ -15,6 +15,7 @@ def gerar_dados_grafico(
         data_inicio: date, 
         data_fim: date, 
         colunas: list[ColunaClima],
+        resposta_formato : RespostaFormato,
         agrupamentos: list[FiltroGraficoAgrupamento],
         hora_fixa: list[int],
         janela_hora_inicio: list[int],
@@ -50,5 +51,5 @@ def gerar_dados_grafico(
     if df is None or df.empty:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
-    return converter_df_para_objeto(df)
+    return converter_para_o_front(df= df, formato= resposta_formato)
 

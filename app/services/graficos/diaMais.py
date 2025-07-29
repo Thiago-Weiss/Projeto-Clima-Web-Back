@@ -1,8 +1,8 @@
 import pandas as pd
 from datetime import date
 
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_df_para_objeto, validar_grafico_coluna_config
-from app.core import ColunaClima, FiltroGraficoAgrupamento, DiaMais
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config
+from app.core import ColunaClima, FiltroGraficoAgrupamento, DiaMais, RespostaFormato
 from app.core.const.clima import DATA
 
 
@@ -12,6 +12,7 @@ def gerar_dados_grafico_dia_mais(
         data_inicio: date, 
         data_fim: date,
         modo_dia: DiaMais, 
+        resposta_formato : RespostaFormato,
         colunas: list[ColunaClima],
         agrupamentos: list[FiltroGraficoAgrupamento],
         hora_fixa: list[int],
@@ -67,5 +68,5 @@ def gerar_dados_grafico_dia_mais(
     # gera o novo data frame dos dias certos sem agrupar o dia
     df = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim, False)
 
-    return converter_df_para_objeto(df)
+    return converter_para_o_front(df= df, formato= resposta_formato)
 
