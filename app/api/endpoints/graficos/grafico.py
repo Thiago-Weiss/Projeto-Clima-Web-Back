@@ -12,8 +12,8 @@ router = APIRouter()
 
 @router.get("/grafico")
 def obter_dados_grafico(
-    estado: Estados     = Query(default= "Santa Catarina", description= "OBRIGATÓRIO | "),
-    cidade: str         = Query(default= "OBRIGATÓRIO | São José"),
+    estado: Estados     = Query(default= "Santa Catarina", description= "OBRIGATÓRIO"),
+    cidade: str         = Query(default= "São José",  description= "OBRIGATÓRIO"),
     data_inicio: date   = Query(default="2023-01-01", description= "OBRIGATÓRIO | Data no formato YYYY-MM-DD"),
     data_fim: date      = Query(default="2023-12-31", description= "OBRIGATÓRIO | Data no formato YYYY-MM-DD"),
 
@@ -53,8 +53,8 @@ def obter_dados_grafico(
 
 @router.get("/grafico/dia-mais")
 def obter_dados_grafico(
-    estado: Estados     = Query(default= "OBRIGATÓRIO | Santa Catarina"),
-    cidade: str         = Query(default= "OBRIGATÓRIO | São José"),
+    estado: Estados     = Query(default= "Santa Catarina", description= "OBRIGATÓRIO"),
+    cidade: str         = Query(default= "São José" , description= "OBRIGATÓRIO"),
     data_inicio: date   = Query(default="2023-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date      = Query(default="2023-12-31", description= "Data no formato YYYY-MM-DD"),
     
