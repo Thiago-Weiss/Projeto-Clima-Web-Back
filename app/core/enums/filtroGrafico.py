@@ -1,14 +1,14 @@
 from enum import Enum
-
+from app.core.const.clima import MAX_DIA, MIN_DIA, SUM_DIA, MEAN_DIA, HORA_FIXA, HORA_MIN_JANELA, HORA_MAX_JANELA, HORA_MEAN_JANELA, VARIACAO, VARIACAO_JANELA
 
 class FiltroGraficoAgrupamento(str, Enum):
-    MAX_DIA             = "max_dia"
-    MIN_DIA             = "min_dia"
-    SUM_DIA             = "sum_dia"
-    MEAN_DIA            = "mean_dia"
-    HORA_FIXA           = "hora_fixa"
-    HORA_MIN_JANELA     = "hora_min_janela"
-    HORA_MAX_JANELA     = "hora_max_janela"
-    HORA_MEAN_JANELA    = "hora_mean_janela"
-    VARIACAO            = "variacao"
-    VARIACAO_JANELA     = "variacao_janela"
+    MAX_DIA             = MAX_DIA
+    MIN_DIA             = MIN_DIA
+    SUM_DIA             = SUM_DIA
+    MEAN_DIA            = MEAN_DIA
+    HORA_FIXA           = HORA_FIXA
+    HORA_MIN_JANELA     = HORA_MIN_JANELA
+    HORA_MAX_JANELA     = HORA_MAX_JANELA
+    HORA_MEAN_JANELA    = HORA_MEAN_JANELA
+    VARIACAO            = VARIACAO
+    VARIACAO_JANELA     = VARIACAO_JANELA

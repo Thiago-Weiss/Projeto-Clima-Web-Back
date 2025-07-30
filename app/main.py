@@ -1,9 +1,10 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 
 from app.services.obterDataBase import iniciar_arquivos
-from app.api.endpoints import estados, cidades, grafico, colunasClima
+from app.api.endpoints import estados, cidades, grafico, pesquisaClima
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -16,6 +17,7 @@ async def lifespan(app: FastAPI):
     
 app = FastAPI(lifespan=lifespan)
 
+
 # Adicionando o middleware CORS corretamente
 app.add_middleware(
     CORSMiddleware,
@@ -25,9 +27,16 @@ app.add_middleware(
     allow_headers=["*"],  # Permite todos os cabeçalhos
 )
 
+
+
+
+@app.get("/", include_in_schema= False)
+async def go_docs():
+    return RedirectResponse(url= "/docs")
+
 # Inclui os roteadores
 app.include_router(estados.router)
 app.include_router(cidades.router)
 app.include_router(grafico.router)
-app.include_router(colunasClima.router)
+app.include_router(pesquisaClima.router)
 
