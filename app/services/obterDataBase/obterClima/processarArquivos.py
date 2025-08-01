@@ -79,6 +79,59 @@ def validar_e_limpar_dados(df: pd.DataFrame) -> pd.DataFrame:
 
     return df
 
+# garante o df tenha os 24 pontos de todos os dias
+def completar_datas_horas(df: pd.DataFrame, ano: int) -> pd.DataFrame:
+    # garante que data seja do tipo datatime
+    df[DATA] = pd.to_datetime(df[DATA])
+
+    # gera todos os pontos para o ano pricipal
+    inicio = pd.Timestamp(year=ano, month=1, day=1)
+    fim = pd.Timestamp(year=ano, month=12, day=31)
+    dias_ano = pd.date_range(inicio, fim, freq="D")
+    horas = range(24)
+
+    # index de todos os pontos
+    grid_ano = pd.MultiIndex.from_product([dias_ano, horas], names=[DATA, HORA]).to_frame(index=False)
+
+    # garante que o ano inteiro tenhas os 24 pontos por dia
+    df_ano = grid_ano.merge(df, on=[DATA, HORA], how="left")
+
+
+
+    # pega datas fora do ano atual como:o primeiro dia do proximo ano ou o ultimo da ano anterior
+    datas_fora = df.loc[(df[DATA] < inicio) | (df[DATA] > fim), DATA].unique()
+
+    # cira os 24 pontos para os dias fora do ano atual
+    grids_extras = []
+    for data_extra in datas_fora:
+        # cria 24 horas pra esse dia
+        grid_extra = pd.DataFrame({
+            DATA: [data_extra] * 24,
+            HORA: list(horas)
+        })
+        grids_extras.append(grid_extra)
+
+
+    # se tiver dias fora do ano junta eles e prenche os dados se nao tiver cria um df vazio
+    if grids_extras:
+        grid_extras_df = pd.concat(grids_extras, ignore_index=True)
+        df_extras = grid_extras_df.merge(df, on=[DATA, HORA], how="left")
+
+    else:
+        df_extras = pd.DataFrame(columns=df_ano.columns)
+
+
+    # junta o df do ano atual com o dias a mais  se tiver 
+    if not df_extras.empty:
+        df_final = pd.concat([df_ano, df_extras], ignore_index=True)
+    else:
+        df_final = df_ano
+
+    # reordena tudo
+    df_final = df_final.sort_values(by=[DATA, HORA]).reset_index(drop=True)
+
+    return df_final
+
 
 
 
@@ -200,6 +253,8 @@ def processar_csv(dir):
 
             # trata os dados dos campos e validas eles, se estão dentro de limites aceitaveis
             df = validar_e_limpar_dados(df) 
+
+            df = completar_datas_horas(df, ano)
 
             # validar o df antes de salvar 
             if not validar_df_nao_vazios(df, csvPath):

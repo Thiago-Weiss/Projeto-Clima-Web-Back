@@ -38,7 +38,7 @@ def iniciar_arquivos():
     t4.join()
 
 
-    if True:
+    if False:
         shutil.rmtree(DOWNLOAD_DIR_BASE)
         shutil.rmtree(EXTRACT_DIR_BASE)
 
