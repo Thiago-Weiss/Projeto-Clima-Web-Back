@@ -263,13 +263,13 @@ def processar_csv(dir):
             # salvar o dados
             # Cria nome do arquivo parquet
             nome = f"{ano}_LA{int(float(latitude))}_LO{int(float(longitude))}_{codigo}.parquet"
-            parquet_local_path = path.join(PARQUET_LOCAL_DIR, str(ano), nome)
+            parquet_local_path = Path(PARQUET_LOCAL_DIR) / str(ano) / nome
             parquet_path = path.join(OUTPUT_DIR, str(ano), nome)
 
             df.to_parquet(parquet_path, index=False)
 
             registrosIndex.append({
-                ARQUIVO: parquet_local_path,
+                ARQUIVO: parquet_local_path.as_posix(),
                 ANO: ano,
                 REGIAO: regiao,
                 UF: uf,
