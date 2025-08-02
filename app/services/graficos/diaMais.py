@@ -4,6 +4,8 @@ from datetime import date
 from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config
 from app.core import ColunaClima, FiltroGraficoAgrupamento, DiaMais, RespostaFormato
 from app.core.const.clima import DATA
+from app.core.const.respostasFront import GRAFICO, PERC_DADOS_VALIDOS, DADOS_TOTAIS
+
 
 
 def gerar_dados_grafico_dia_mais(
@@ -70,7 +72,8 @@ def gerar_dados_grafico_dia_mais(
     df, _, _ = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim, False)
 
 
-    print(f"Quantidade de dado {dados_totais} {perc_validos:.2f}% validos")
-
-    return converter_para_o_front(df= df, formato= resposta_formato)
-
+    return {
+        DADOS_TOTAIS: int(dados_totais),
+        PERC_DADOS_VALIDOS: round(perc_validos, 2),
+        GRAFICO: converter_para_o_front(df= df, formato= resposta_formato),
+    }
