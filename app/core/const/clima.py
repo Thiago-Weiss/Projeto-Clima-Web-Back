@@ -1,6 +1,6 @@
 from datetime import datetime
-from .basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE, PROCESSADOS_DIR_BASE
-
+from .basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE, PROCESSADOS_DIR_BASE, DATA_DIR
+from pathlib import Path
 
 # url de download
 URL_DOWNLOAD = 'https://portal.inmet.gov.br/uploads/dadoshistoricos/'
@@ -18,6 +18,9 @@ EXTRACT_DIR = EXTRACT_DIR_BASE / SUB_DIR
 # salvo o arquivo final
 PARQUET_DIR =  PROCESSADOS_DIR_BASE / SUB_DIR
 
+DATA_LOCAL_DIR = Path(DATA_DIR)
+
+PARQUET_LOCAL_DIR =  DATA_LOCAL_DIR / "processados" / SUB_DIR
 
 
 # ano dos arquivos
