@@ -12,6 +12,10 @@ def converter_para_o_front(df : pd.DataFrame, formato : RespostaFormato) -> list
     if DATA in df.columns:
         df[DATA] = df[DATA].dt.strftime('%d-%m-%Y')
 
+    # arredonda os valores quebrados
+    df = df.round(3)
+
+    # troca o NaN do pandas por None do Python
     df = df.replace({np.nan: None})
 
     match formato:

@@ -43,7 +43,7 @@ def obter_dados_grafico(
             hora_fixa= hora_fixa,
             janela_hora_inicio= janela_hora_inicio,
             janela_hora_fim= janela_hora_fim,
-            dados_agrupados_por_x_dias = dados_agrupados_por_x_dias
+            dados_agrupados_por_x_dias = dados_agrupados_por_x_dias,
             auto_completar_colunas = auto_completar_colunas,
         )
         return JSONResponse(content= resultado)
