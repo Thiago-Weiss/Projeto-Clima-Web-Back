@@ -1,6 +1,7 @@
 from os import path
 import pandas as pd
 
+from pathlib import Path
 from app.core.const.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA
 from app.services.graficos.utils import calcular_distancia_direcao, abrir_data_frame
 from app.core import EstacaoInfo
@@ -41,9 +42,9 @@ def obter_paths_por_cord_ano(
         # Encontra a estação mais próxima
         estacao = df_filtrado.nsmallest(1, DISTANCIA).iloc[0]
 
-
+        print(estacao[ARQUIVO])
         # path do pc que está rodando mais parte local
-        arquivo_path = BASE_DIR / estacao[ARQUIVO]
+        arquivo_path = BASE_DIR / Path(estacao[ARQUIVO])
         print(arquivo_path)
         # adiciona a lista os dados da estacao
         resultados.append(
