@@ -1,11 +1,9 @@
 import pandas as pd
 from datetime import date
 
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config, agrupar_dados_por_dias
+from app.core import ColunaClima, FiltroGraficoAgrupamento, RespostaFormato
 
-
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config
-from app.core import GraficoColunaConfig, ColunaClima, FiltroGraficoAgrupamento, RespostaFormato
-from app.core.const.clima import COLUNAS_PADRAO
 
 
 
@@ -20,6 +18,7 @@ def gerar_dados_grafico(
         hora_fixa: list[int],
         janela_hora_inicio: list[int],
         janela_hora_fim: list[int],
+        dados_agrupados_por_x_dias: int,
         auto_completar_colunas : bool):
     
     # valida a localizacao
@@ -48,9 +47,18 @@ def gerar_dados_grafico(
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
     # gera o dataframe 
-    df = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim)
+    df, dados_totais, perc_validos = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim)
     if df is None or df.empty:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
+
+    # agrupa dias de dados gerando menos pontos no grafico
+    if dados_agrupados_por_x_dias:
+        df = agrupar_dados_por_dias(df, dados_agrupados_por_x_dias, coluna_configs)
+
+    #TODO aqui fazer uma funcao de comparacao
+
+
+    print(f"Quantidade de dado {dados_totais} {perc_validos:.2f}% validos")
     return converter_para_o_front(df= df, formato= resposta_formato)
 

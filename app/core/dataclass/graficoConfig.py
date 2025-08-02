@@ -12,3 +12,4 @@ class GraficoColunaConfig:
     hora_fixa: int
     hora_janela_inicio: int
     hora_janela_fim: int
+    

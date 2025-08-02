@@ -1,7 +1,8 @@
 from .calcularDistanciaDirecao.calcular import calcular_distancia_direcao
 
 from .manipularDataFrame.abrirDFParquet import abrir_data_frame
-from .manipularDataFrame.agruparDias import agrupar_dados_por_dia
+from .manipularDataFrame.agruparDia import agrupar_dados_do_dia
+from .manipularDataFrame.agruparDias import agrupar_dados_por_dias
 from .manipularDataFrame.converterParaFront import converter_para_o_front
 from .manipularDataFrame.filtrarPorDatas import filtrar_por_datas
 from .manipularDataFrame.gerarDataFrame import gerar_data_frame

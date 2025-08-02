@@ -25,6 +25,8 @@ def obter_dados_grafico(
     janela_hora_inicio: list[int]                   = Query(default=[], description= "Janela hora inicio"),
     janela_hora_fim: list[int]                      = Query(default=[], description= "Janela hora fim"),
 
+    dados_agrupados_por_x_dias: int = Query(default= 1, ge=1, le= 90, description= "Agrupa os dados/dias para gerar menos pontos pra grandes consultas"),
+
     auto_completar_colunas : bool = Query(default= True, description= "Nao validar os parametros para as colunas e auto-completar elas"),
 ):
 
@@ -41,6 +43,7 @@ def obter_dados_grafico(
             hora_fixa= hora_fixa,
             janela_hora_inicio= janela_hora_inicio,
             janela_hora_fim= janela_hora_fim,
+            dados_agrupados_por_x_dias = dados_agrupados_por_x_dias
             auto_completar_colunas = auto_completar_colunas,
         )
         return JSONResponse(content= resultado)

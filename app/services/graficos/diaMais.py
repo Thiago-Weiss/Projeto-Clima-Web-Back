@@ -40,15 +40,15 @@ def gerar_dados_grafico_dia_mais(
     if isinstance(coluna_configs[0], str):
         return coluna_configs
 
+
     # verifica se tem dados historicos
     arquivo_paths = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
     if not arquivo_paths:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
 
-
     # gera o dataframe 
-    df = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim)
+    df, dados_totais, perc_validos  = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim)
     if df is None or df.empty:
         return f"Sem dados historicos para {estado} {cidade}, no periodo de {data_inicio} a {data_fim}"
 
@@ -67,7 +67,10 @@ def gerar_dados_grafico_dia_mais(
     arquivo_paths = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
     
     # gera o novo data frame dos dias certos sem agrupar o dia
-    df = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim, False)
+    df, _, _ = gerar_data_frame(arquivo_paths, coluna_configs, dt_inicio, dt_fim, False)
+
+
+    print(f"Quantidade de dado {dados_totais} {perc_validos:.2f}% validos")
 
     return converter_para_o_front(df= df, formato= resposta_formato)
 
