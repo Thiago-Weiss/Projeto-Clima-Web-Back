@@ -44,7 +44,7 @@ def obter_paths_por_cord_ano(
 
         # path do pc que está rodando mais parte local
         arquivo_path = BASE_DIR / estacao[ARQUIVO]
-
+        print(arquivo_path)
         # adiciona a lista os dados da estacao
         resultados.append(
             EstacaoInfo(
