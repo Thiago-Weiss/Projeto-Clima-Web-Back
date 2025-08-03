@@ -42,10 +42,9 @@ def obter_paths_por_cord_ano(
         # Encontra a estação mais próxima
         estacao = df_filtrado.nsmallest(1, DISTANCIA).iloc[0]
 
-        print(estacao[ARQUIVO])
-        # path do pc que está rodando mais parte local
+        # path do pc que está rodando mais parte local salva no index
         arquivo_path = BASE_DIR / Path(estacao[ARQUIVO])
-        print(arquivo_path)
+
         # adiciona a lista os dados da estacao
         resultados.append(
             EstacaoInfo(

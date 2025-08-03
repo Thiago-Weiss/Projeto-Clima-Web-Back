@@ -263,7 +263,9 @@ def processar_csv(dir):
             # salvar o dados
             # Cria nome do arquivo parquet
             nome = f"{ano}_LA{int(float(latitude))}_LO{int(float(longitude))}_{codigo}.parquet"
+            # cria o path pra salvar no index relativo a pasta /app
             parquet_local_path = Path(PARQUET_LOCAL_DIR) / str(ano) / nome
+            # cria o path pra salvar que é o path absoluto atá a pasta de processados/clima
             parquet_path = path.join(OUTPUT_DIR, str(ano), nome)
 
             df.to_parquet(parquet_path, index=False)
