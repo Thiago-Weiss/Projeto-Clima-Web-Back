@@ -1,6 +1,5 @@
 from .autocomplite import estados, cidades, pesquisaClima
 from .acordar import acordar
-from .graficos import grafico
-from .graficos import pesquisaSimples
+from .graficos import grafico, pesquisaSimples, pesquisaAvancada
 
 
