@@ -20,7 +20,8 @@ def gerar_dados_pesquisa_avancada(
         janela_hora_fim: list[int],
 
         dados_agrupados_por_x_dias: int,
-        resposta_formato : RespostaFormato,):
+        resposta_formato : RespostaFormato,
+    ):
     
     # valida a localizacao
     latitude, longitude = obter_lat_lon(cidade= cidade, estado= estado)

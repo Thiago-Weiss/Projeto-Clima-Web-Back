@@ -3,41 +3,39 @@ from fastapi.responses import JSONResponse
 from datetime import date
 
 from app.services.graficos import gerar_dados_pesquisa_dia_mais
-from app.core import Estados, PesquisaSimplesOpcoes, RespostaFormato
-
-
+from app.core import Estados, RespostaFormato, PesquisaDiaMaisOpcoes
 
 
 
 router = APIRouter()
 
-@router.get("/grafico/pesquisa-simples")
-def get_pesquisa_simples(
+
+@router.get("/grafico/dia-mais-certo")
+def obter_dados_grafico(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),
     data_inicio: date   = Query(..., example= "2023-01-01", description= "Data no formato YYYY-MM-DD"),
     data_fim: date      = Query(..., example= "2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    
+    coluna_climatica: PesquisaDiaMaisOpcoes = Query(description= "Nome da coluna a ser pesquisada"),
 
-    coluna_climatica: PesquisaSimplesOpcoes = Query(description= "Nome da coluna a ser pesquisada"),
-
-    dados_agrupados_por_x_dias: int = Query(default= 1, ge=1, le= 90, description= "Agrupa os dados/dias para gerar menos pontos pra grandes consultas"),
-    resposta_formato : RespostaFormato = Query(default= RespostaFormato.OBJETO, description= "Formatacao dos dados na resposta"),
+    dias_marge : int = Query(..., example= 3, description= "Quantos dias antes e depois do dia mais vai retornar junto", ge= 1, le= 7),
+    resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
 ):
-
     try:
         resultado = gerar_dados_pesquisa_dia_mais(
             estado= estado.value,
             cidade= cidade,
             data_inicio= data_inicio,
             data_fim= data_fim,
-            coluna_climatica= coluna_climatica,
-            dados_agrupados_por_x_dias = dados_agrupados_por_x_dias,
+
+            coluna_climatica = coluna_climatica,
+
+            dias_marge= dias_marge,
             resposta_formato = resposta_formato,
         )
+
         return resultado
 
     except Exception as e:
         return JSONResponse(status_code=500, content={"erro": f"Erro interno: {str(e)}"})
-
-
-

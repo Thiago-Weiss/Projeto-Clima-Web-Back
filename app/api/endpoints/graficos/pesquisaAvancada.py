@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from datetime import date
+
 from app.services.graficos import gerar_dados_pesquisa_avancada
 from app.core import Estados, ColunaClima, FiltroGraficoAgrupamento, RespostaFormato
 
@@ -23,8 +24,8 @@ def get_pesquisa_avancada(
     janela_hora_inicio: list[int]                   = Query(description= "OBRIGATÓRIO | TEM QUE TER A MESMA QUANTIDAD DE ELESMENTOS (1 - 5) | Janela hora inicio"),
     janela_hora_fim: list[int]                      = Query(description= "OBRIGATÓRIO | TEM QUE TER A MESMA QUANTIDAD DE ELESMENTOS (1 - 5) | Janela hora fim"),
 
-    resposta_formato : RespostaFormato = Query(default= RespostaFormato.OBJETO, description= "Formatacao dos dados na resposta"),
     dados_agrupados_por_x_dias: int = Query(default= 1, ge=1, le= 30, description= "Agrupa os dados/dias para gerar menos pontos pra grandes consultas"),
+    resposta_formato : RespostaFormato = Query(default= RespostaFormato.OBJETO, description= "Formatacao dos dados na resposta"),
 ):
 
 
