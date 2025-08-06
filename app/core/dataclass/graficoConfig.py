@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Tuple
 
 from app.core import ColunaClima, FiltroGraficoAgrupamento
 
@@ -9,7 +8,7 @@ from app.core import ColunaClima, FiltroGraficoAgrupamento
 class GraficoColunaConfig:
     coluna: ColunaClima
     modo_agrupamento: FiltroGraficoAgrupamento
-    hora_fixa: int
-    hora_janela_inicio: int
-    hora_janela_fim: int
+    hora_fixa: int = 0
+    hora_janela_inicio: int = 0
+    hora_janela_fim: int = 0
     

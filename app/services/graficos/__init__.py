@@ -1,3 +1,4 @@
 from .gerarDadosGrafico import gerar_dados_grafico
 from .diaMais import gerar_dados_grafico_dia_mais
+from .pesquisaSimples import gerar_dados_pesquisa_simples
 

@@ -5,3 +5,5 @@ from .enums.filtroGrafico import FiltroGraficoAgrupamento
 from .dataclass.graficoConfig import GraficoColunaConfig
 from .enums.diaMais import DiaMais
 from .enums.respostaFormato import RespostaFormato
+from .enums.pesquisaSimplesOpcoes import PesquisaSimplesOpcoes
+
