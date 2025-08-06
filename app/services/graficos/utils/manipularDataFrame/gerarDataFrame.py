@@ -53,7 +53,13 @@ def gerar_data_frame(
     df_grafico = pd.concat(dfs_processados, ignore_index=True)
     
     df_grafico[DATA] = pd.to_datetime(df_grafico[DATA])
-    df_grafico = df_grafico.sort_values(DATA, ascending= True).reset_index(drop=True)
+
+    if agrupar_o_dia:
+        # ordena só por dia 
+        df_grafico = df_grafico.sort_values(DATA, ascending= True).reset_index(drop=True)
+    else: 
+        # ordena por dia e por hora
+        df_grafico = df_grafico.sort_values([DATA, HORA], ascending=[True, True]).reset_index(drop=True)
 
     # estatisticas dos dados
     dados_totais = dados_validos + dados_ausentes

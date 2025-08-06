@@ -54,7 +54,7 @@ def obter_dados_grafico(
 
 
 
-@router.get("/grafico/dia-mais")
+@router.get("/grafico/dia-mais-antigo")
 def obter_dados_grafico(
     estado: Estados     = Query(default= "Santa Catarina", description= "OBRIGATÓRIO"),
     cidade: str         = Query(default= "São José" , description= "OBRIGATÓRIO"),

@@ -10,7 +10,7 @@ from app.core import Estados, RespostaFormato, PesquisaDiaMaisOpcoes
 router = APIRouter()
 
 
-@router.get("/grafico/dia-mais-certo")
+@router.get("/grafico/dia-mais")
 def obter_dados_grafico(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),
