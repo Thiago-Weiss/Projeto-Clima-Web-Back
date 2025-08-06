@@ -5,13 +5,15 @@ import time
 import shutil
 
 # funcoes minhas 
-from .verificarArquivos import verificar_arquivos
-from .baixarArquivos import baixar_arquivos
-from .descompactarArquivos import descompactar_arquivos
-from .processarArquivos import processar_csvs
+from .obterClima.verificarArquivos import verificar_arquivos
+from .obterClima.baixarArquivos import baixar_arquivos
+from .obterClima.descompactarArquivos import descompactar_arquivos
+from .obterClima.processarArquivos import processar_csvs
 from app.services.obterDataBase.obterCidadesEstados import baixarArquivoCidadesEstados
 
 from app.core.const.basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE
+from app.core.const.estadosCidades import ZIP_DIR, EXTRACT_DIR
+
 
 def iniciar_arquivos():
     start = time.time()
@@ -38,6 +40,7 @@ def iniciar_arquivos():
     t4.join()
 
 
+    # remove os arquivos base
     if False:
         shutil.rmtree(DOWNLOAD_DIR_BASE)
         shutil.rmtree(EXTRACT_DIR_BASE)

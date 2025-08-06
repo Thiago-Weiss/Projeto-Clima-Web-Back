@@ -1,1 +1,1 @@
-from .obterClima.obterArquivos import iniciar_arquivos
+from .obterArquivos import iniciar_arquivos

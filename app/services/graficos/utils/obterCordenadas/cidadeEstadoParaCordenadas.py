@@ -1,9 +1,20 @@
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderTimedOut, GeocoderServiceError
+from app.core.const.estadosCidades import *
+import pandas as pd
 
 def obter_lat_lon(cidade: str, estado: str):
-    geolocator = Nominatim(user_agent="projeto-clima")
+    # abre o arquivo
+    df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS, columns= [COLUNA_ESTADO, COLUNA_CIDADE, LATITUDE, LONGITUDE])
+    # filtra por estado e cidade
+    df = df[(df[COLUNA_ESTADO] == estado) & (df[COLUNA_CIDADE] == cidade)]
+    if not df.empty:
+        lat = df[LATITUDE].iloc[0]
+        lon = df[LONGITUDE].iloc[0]
+        return lat, lon
 
+
+    geolocator = Nominatim(user_agent="projeto-clima")
     try:
         local = geolocator.geocode(f"{cidade}, {estado}, Brasil")
         if local:

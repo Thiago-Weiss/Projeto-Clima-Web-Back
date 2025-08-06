@@ -2,11 +2,10 @@ from os import makedirs, path
 import requests
 import zipfile
 import pandas as pd
-import shutil
+import geopandas as gpd
 
 # meus arquivos
 from app.core.const.estadosCidades import *
-
 
 
 def baixarArquivoCidadesEstados():
@@ -18,31 +17,84 @@ def baixarArquivoCidadesEstados():
 
 
     # se nao tem o arquivo final
-    if not path.exists(PARQUET_FILE):
+    if not path.exists(PARQUET_FILE_CIDADES_ESTADOS):
 
         # se nao tem o extraido "desipado"
-        if not path.exists(EXTRACT_FILE):
+        if not path.exists(EXTRACT_FILE_CIDADES_ESTADOS):
 
             # se nao tem o arquivo baixado
-            if not path.exists(ZIP_FILE):
+            if not path.exists(ZIP_FILE_CIDADES_ESTADOS):
 
-                response = requests.get(URL_DOWNLOAD)
-                with open(ZIP_FILE, "wb") as f:
+                # baixa o arquivo zip
+                response = requests.get(URL_DOWNLOAD_CIDADES_ESTADOS)
+                with open(ZIP_FILE_CIDADES_ESTADOS, "wb") as f:
                     f.write(response.content)
 
             # extrair o arquivo
-            with zipfile.ZipFile(ZIP_FILE, 'r') as zipRef:
+            with zipfile.ZipFile(ZIP_FILE_CIDADES_ESTADOS, 'r') as zipRef:
                 zipRef.extractall(EXTRACT_DIR)
 
         # processa o arquivo
-        df = pd.read_excel(EXTRACT_FILE, engine='odf', dtype=str, skiprows=6, usecols=[COLUNA_ESTADO, COLUNA_CIDADE])
-        df = df.groupby(COLUNA_ESTADO)[COLUNA_CIDADE].apply(list).reset_index()
-        df.to_parquet(PARQUET_FILE, index=False)
+        df = pd.read_excel(EXTRACT_FILE_CIDADES_ESTADOS, engine='odf', dtype=str, skiprows=6, usecols=[COLUNA_ESTADO, COLUNA_CIDADE, COLUNA_CODIGO_CIDADE])
+        # nao tem duplicados entao nao faz diferença
+        df = df.drop_duplicates()
+        # salva o arquivo
+        df.to_parquet(PARQUET_FILE_CIDADES_ESTADOS, index=False)
+
+        # arquivo das cordenadas
+        # se nao tem o extraido "desipado"
+        if not path.exists(EXTRACT_FILE_CORDENADAS):
+
+            # se nao tem o arquivo baixado
+            if not path.exists(ZIP_FILE_CORDENADAS):
+
+                # baixa o arquivo zip
+                response = requests.get(URL_DOWNLOAD_CORDENADAS)
+                with open(ZIP_FILE_CORDENADAS, "wb") as f:
+                    f.write(response.content)
+
+            # extrair o arquivo
+            with zipfile.ZipFile(ZIP_FILE_CORDENADAS, 'r') as zipRef:
+                zipRef.extractall(EXTRACT_DIR)
 
 
-    # remove os arquivos temporarios
-    shutil.rmtree(ZIP_DIR)
-    shutil.rmtree(EXTRACT_DIR)
+        # processa o arquivo
+        # Carrega o shapefile
+        gdf = gpd.read_file(EXTRACT_FILE_CORDENADAS)
+
+        # Reprojeta para um sistema métrico (UTM zone 23S - EPSG:31983)
+        gdf_proj = gdf.to_crs(epsg=31983)
+
+        # Calcula o centroide no sistema projetado e converte de volta para WGS84 (latitude/longitude)
+        gdf[CENTROIDE] = gdf_proj.centroid.to_crs(epsg=4326)
+
+        # Extrai latitude e longitude do centroide
+        gdf[LATITUDE] = gdf[CENTROIDE].y
+        gdf[LONGITUDE] = gdf[CENTROIDE].x
+
+        # Seleciona colunas desejadas
+        df_cordenadas = gdf[[CD_MUN, LATITUDE, LONGITUDE]]
+        
+        #renomeio no nome da coluna do codigo
+        df_cordenadas = df_cordenadas.rename(columns={CD_MUN: COLUNA_CODIGO_CIDADE})
+
+        # abre o arquivo das cidades
+        df_cidades_estados = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS)
+
+        # junta os dois arquivos de cordenada e de cidade estado
+        df_completo = df_cordenadas.merge(df_cidades_estados, on= COLUNA_CODIGO_CIDADE, how= "left")
+        
+        # salva o arquivo
+        df_completo.to_parquet(PARQUET_FILE_CIDADES_ESTADOS, index= False)
+
+
+
+
+
+
+
+
+
 
 
 
