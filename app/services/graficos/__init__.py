@@ -2,5 +2,5 @@ from .gerarDadosGrafico import gerar_dados_grafico
 from .diaMais import gerar_dados_grafico_dia_mais
 from .pesquisaSimples import gerar_dados_pesquisa_simples
 from .pesquisaAvancada import gerar_dados_pesquisa_avancada
-from .pesquisaDiaMais import gerar_dados_pesquisa_dia_mais
+from .pesquisaDiaMais import gerar_dados_dia_mais
 

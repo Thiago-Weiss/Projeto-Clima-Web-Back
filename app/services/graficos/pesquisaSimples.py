@@ -12,7 +12,9 @@ def gerar_dados_pesquisa_simples(
         cidade: str, 
         data_inicio: date, 
         data_fim: date, 
+
         coluna_climatica: PesquisaSimplesOpcoes,
+        
         dados_agrupados_por_x_dias: int,
         resposta_formato : RespostaFormato,
     ):

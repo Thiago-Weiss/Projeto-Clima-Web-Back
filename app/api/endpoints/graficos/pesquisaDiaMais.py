@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from datetime import date
 
-from app.services.graficos import gerar_dados_pesquisa_dia_mais
+from app.services.graficos import gerar_dados_dia_mais
 from app.core import Estados, RespostaFormato, PesquisaDiaMaisOpcoes
 
 
@@ -11,7 +11,7 @@ router = APIRouter()
 
 
 @router.get("/grafico/dia-mais")
-def obter_dados_grafico(
+def get_dia_mais(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),
     data_inicio: date   = Query(..., example= "2023-01-01", description= "Data no formato YYYY-MM-DD"),
@@ -23,7 +23,7 @@ def obter_dados_grafico(
     resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
 ):
     try:
-        resultado = gerar_dados_pesquisa_dia_mais(
+        resultado = gerar_dados_dia_mais(
             estado= estado.value,
             cidade= cidade,
             data_inicio= data_inicio,

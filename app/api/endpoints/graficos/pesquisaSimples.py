@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 from datetime import date
 
-from app.services.graficos import gerar_dados_pesquisa_dia_mais
+from app.services.graficos import gerar_dados_pesquisa_simples
 from app.core import Estados, PesquisaSimplesOpcoes, RespostaFormato
 
 
@@ -25,12 +25,14 @@ def get_pesquisa_simples(
 ):
 
     try:
-        resultado = gerar_dados_pesquisa_dia_mais(
+        resultado = gerar_dados_pesquisa_simples(
             estado= estado.value,
             cidade= cidade,
             data_inicio= data_inicio,
             data_fim= data_fim,
+
             coluna_climatica= coluna_climatica,
+            
             dados_agrupados_por_x_dias = dados_agrupados_por_x_dias,
             resposta_formato = resposta_formato,
         )

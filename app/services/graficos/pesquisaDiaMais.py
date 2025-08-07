@@ -9,7 +9,7 @@ from app.core.const.pesquisaDiaMaisConfig import PESQUISA_DIA_MAIS_CONFIGS
 
 
 
-def gerar_dados_pesquisa_dia_mais(
+def gerar_dados_dia_mais(
         estado: str, 
         cidade: str, 
         data_inicio: date, 
