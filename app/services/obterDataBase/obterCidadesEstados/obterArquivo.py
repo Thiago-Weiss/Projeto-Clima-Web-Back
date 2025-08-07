@@ -15,10 +15,11 @@ def baixarArquivoCidadesEstados():
     makedirs(EXTRACT_DIR, exist_ok=True)
     makedirs(PARQUET_DIR, exist_ok=True)
 
-
+    # arquivo final
     # se nao tem o arquivo final
     if not path.exists(PARQUET_FILE_CIDADES_ESTADOS):
 
+        # arquivo do cidade estados
         # se nao tem o extraido "desipado"
         if not path.exists(EXTRACT_FILE_CIDADES_ESTADOS):
 
@@ -34,12 +35,6 @@ def baixarArquivoCidadesEstados():
             with zipfile.ZipFile(ZIP_FILE_CIDADES_ESTADOS, 'r') as zipRef:
                 zipRef.extractall(EXTRACT_DIR)
 
-        # processa o arquivo
-        df = pd.read_excel(EXTRACT_FILE_CIDADES_ESTADOS, engine='odf', dtype=str, skiprows=6, usecols=[COLUNA_ESTADO, COLUNA_CIDADE, COLUNA_CODIGO_CIDADE])
-        # nao tem duplicados entao nao faz diferença
-        df = df.drop_duplicates()
-        # salva o arquivo
-        df.to_parquet(PARQUET_FILE_CIDADES_ESTADOS, index=False)
 
         # arquivo das cordenadas
         # se nao tem o extraido "desipado"
@@ -56,6 +51,13 @@ def baixarArquivoCidadesEstados():
             # extrair o arquivo
             with zipfile.ZipFile(ZIP_FILE_CORDENADAS, 'r') as zipRef:
                 zipRef.extractall(EXTRACT_DIR)
+
+
+        # processa o arquivo cidade estados
+        df_cidades_estados = pd.read_excel(EXTRACT_FILE_CIDADES_ESTADOS, engine='odf', dtype=str, skiprows=6, usecols=[COLUNA_ESTADO, COLUNA_CIDADE, COLUNA_CODIGO_CIDADE])
+        # nao tem duplicados entao nao faz diferença
+        df_cidades_estados = df_cidades_estados.drop_duplicates()
+
 
 
         # processa o arquivo
@@ -78,23 +80,9 @@ def baixarArquivoCidadesEstados():
         #renomeio no nome da coluna do codigo
         df_cordenadas = df_cordenadas.rename(columns={CD_MUN: COLUNA_CODIGO_CIDADE})
 
-        # abre o arquivo das cidades
-        df_cidades_estados = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS)
-
         # junta os dois arquivos de cordenada e de cidade estado
         df_completo = df_cordenadas.merge(df_cidades_estados, on= COLUNA_CODIGO_CIDADE, how= "left")
         
         # salva o arquivo
         df_completo.to_parquet(PARQUET_FILE_CIDADES_ESTADOS, index= False)
-
-
-
-
-
-
-
-
-
-
-
 

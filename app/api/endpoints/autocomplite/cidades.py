@@ -10,12 +10,11 @@ router = APIRouter()
 @router.get("/cidades")
 def obter_cidades_por_estado(estado: Estados = Query(...)):
 
-    df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS)
+    df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS, columns=[COLUNA_ESTADO, COLUNA_CIDADE])
     sc_row = df[df[COLUNA_ESTADO] == estado]
 
     if not sc_row.empty:
-        cidades = sc_row[COLUNA_CIDADE].values[0]
-        cidades = list(map(str, cidades))
+        cidades = sc_row[COLUNA_CIDADE].dropna().unique().tolist()
         return JSONResponse(content= cidades)
 
     return JSONResponse(content=["Municipio não encontrado"])
