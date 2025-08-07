@@ -14,7 +14,7 @@ def obter_cidades_por_estado(estado: Estados = Query(...)):
     sc_row = df[df[COLUNA_ESTADO] == estado]
 
     if not sc_row.empty:
-        cidades = sc_row[COLUNA_CIDADE].dropna().unique().tolist()
+        cidades = sc_row[COLUNA_CIDADE].tolist()
         return JSONResponse(content= cidades)
 
     return JSONResponse(content=["Municipio não encontrado"])
