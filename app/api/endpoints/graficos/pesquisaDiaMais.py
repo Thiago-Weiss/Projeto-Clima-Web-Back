@@ -14,8 +14,8 @@ router = APIRouter()
 def get_dia_mais(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),
-    data_inicio: date   = Query(..., example= "2023-01-01", description= "Data no formato YYYY-MM-DD"),
-    data_fim: date      = Query(..., example= "2023-12-31", description= "Data no formato YYYY-MM-DD"),
+    data_inicio: date   = Query(..., example= "2000-01-01", description= "Data no formato YYYY-MM-DD"),
+    data_fim: date      = Query(..., example= date.today(), description= "Data no formato YYYY-MM-DD"),
     
     coluna_climatica: PesquisaDiaMaisOpcoes = Query(description= "Nome da coluna a ser pesquisada"),
 
