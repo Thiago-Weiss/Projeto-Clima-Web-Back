@@ -1,10 +1,10 @@
 import pandas as pd
 from datetime import date
 
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, pegar_dados_das_estacoes_pesquisadas
 from app.core import PesquisaDiaMaisOpcoes, RespostaFormato
 from app.core.const.clima import DATA
-from app.core.const.respostasFront import GRAFICO, PERC_DADOS_VALIDOS, DADOS_TOTAIS
+from app.core.const.respostasFront import GRAFICO, PERC_DADOS_VALIDOS, DADOS_TOTAIS, ESTACOES_DADOS
 from app.core.const.pesquisaDiaMaisConfig import PESQUISA_DIA_MAIS_CONFIGS
 
 
@@ -71,14 +71,15 @@ def gerar_dados_dia_mais(
     # pega uma margem de dias antes e depois
     dt_inicio = data_mais - pd.Timedelta(days= dias_marge)
     dt_fim = data_mais + pd.Timedelta(days= dias_marge)
-    arquivo_paths = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
+    arquivo_paths_do_dia_mais = obter_paths_por_cord_ano(latitude, longitude, dt_inicio.year, dt_fim.year)
     
     # gera o novo data frame dos dias certos sem agrupar o dia
-    df, _, _ = gerar_data_frame(arquivo_paths, coluna_config, dt_inicio, dt_fim, False)
+    df, _, _ = gerar_data_frame(arquivo_paths_do_dia_mais, coluna_config, dt_inicio, dt_fim, False)
 
 
     return {
         DADOS_TOTAIS: int(dados_totais),
         PERC_DADOS_VALIDOS: round(perc_validos, 2),
+        ESTACOES_DADOS: pegar_dados_das_estacoes_pesquisadas(arquivo_paths),
         GRAFICO: converter_para_o_front(df= df, formato= resposta_formato),
     }

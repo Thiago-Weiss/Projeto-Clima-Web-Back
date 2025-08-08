@@ -12,3 +12,6 @@ from .obterCordenadas.cidadeEstadoParaCordenadas import obter_lat_lon
 from .obterPath.cordenadasParaPath import obter_paths_por_cord_ano
 
 from .validacao.validarColunaFiltros import validar_grafico_coluna_config
+
+from .tratarDadosDaEstacao.pegarDadosEstacao import pegar_dados_das_estacoes_pesquisadas
+

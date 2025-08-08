@@ -5,4 +5,7 @@ class EstacaoInfo:
     arquivo: str
     latitude: float
     longitude: float
-    estacao: str
+    altitude: float
+    estacao_nome: str
+    codigo: str
+    ano: int

@@ -1,9 +1,9 @@
 import pandas as pd
 from datetime import date
 
-from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, validar_grafico_coluna_config, agrupar_dados_por_dias
+from app.services.graficos.utils import obter_lat_lon, obter_paths_por_cord_ano, gerar_data_frame, converter_para_o_front, agrupar_dados_por_dias, pegar_dados_das_estacoes_pesquisadas
 from app.core import RespostaFormato, PesquisaSimplesOpcoes
-from app.core.const.respostasFront import GRAFICO, PERC_DADOS_VALIDOS, DADOS_TOTAIS
+from app.core.const.respostasFront import GRAFICO, PERC_DADOS_VALIDOS, DADOS_TOTAIS, ESTACOES_DADOS
 from app.core.const.pesquisaSimplesConfig import PESQUISA_SIMPLES_CONFIGS
 
 
@@ -55,6 +55,7 @@ def gerar_dados_pesquisa_simples(
     return {
         DADOS_TOTAIS: int(dados_totais),
         PERC_DADOS_VALIDOS: round(perc_validos, 2),
+        ESTACOES_DADOS: pegar_dados_das_estacoes_pesquisadas(arquivo_paths),
         GRAFICO: converter_para_o_front(df= df, formato= resposta_formato),
     }
  

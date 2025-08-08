@@ -2,7 +2,7 @@ from os import path
 import pandas as pd
 
 from pathlib import Path
-from app.core.const.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA
+from app.core.const.index import INDEX_DIR, LATITUDE, LONGITUDE, ARQUIVO, ESTACAO, DISTANCIA, ALTITUDE, CODIGO
 from app.services.graficos.utils import calcular_distancia_direcao, abrir_data_frame
 from app.core import EstacaoInfo
 from app.core.const.basePath import BASE_DIR
@@ -18,7 +18,7 @@ def obter_paths_por_cord_ano(
     for ano in range(ano_inicio, ano_fim + 1):
         # dados do arquivo
         arquivo = path.join(INDEX_DIR, f"index{ano}.parquet")
-        colunas = [LATITUDE, LONGITUDE, ARQUIVO, ESTACAO]
+        colunas = [LATITUDE, LONGITUDE, ALTITUDE, ARQUIVO, ESTACAO, CODIGO]
         
         # abre o arquivo
         df =  abrir_data_frame(arquivo, colunas)
@@ -51,8 +51,11 @@ def obter_paths_por_cord_ano(
                 arquivo= arquivo_path,
                 latitude= estacao[LATITUDE],
                 longitude= estacao[LONGITUDE],
-                estacao= estacao[ESTACAO]
-                ))
+                altitude= estacao[ALTITUDE],
+                estacao_nome= estacao[ESTACAO],
+                codigo= estacao[CODIGO],
+                ano= ano
+            ))
         
     if resultados:
         return resultados
