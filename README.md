@@ -17,7 +17,7 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
   Se o período não for informado, a busca é feita considerando todos os anos disponíveis.
 
 - ✅ **Pesquisa Avançada**  
-  Gera um gráfico com até **5 variáveis climáticas**, permitindo configuração detalhada do processamento interno. [Detalhes completos aqui](##Agrupamento-dos-dados)
+  Gera um gráfico com até **5 variáveis climáticas**, permitindo configuração detalhada do processamento interno. [Detalhes completos aqui](#Agrupamento-dos-dados)
 
 
 ---
