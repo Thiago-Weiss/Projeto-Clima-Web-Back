@@ -51,6 +51,8 @@ VENTO_DIRECAO       = "vento_direcao"
 VENTO_RAJADA        = "vento_rajada"
 VENTO_VELOCIDADE    = "vento_velocidade"
 
+
+
 # Lista com todas as colunas na ordem
 COLUNAS_PADRAO = [
     DATA,

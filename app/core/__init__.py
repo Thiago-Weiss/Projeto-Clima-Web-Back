@@ -1,10 +1,9 @@
 from .dataclass.estacaoInfo import EstacaoInfo
-from .enums.colunasClima import ColunaClima
-from .enums.estados import Estados
-from .enums.filtroGrafico import FiltroGraficoAgrupamento
+from .parametros.pesquisaAvancadaOpcoes import ColunaClima
+from .parametros.estados import Estados
+from .parametros.filtroGrafico import FiltroGraficoAgrupamento
 from .dataclass.graficoConfig import GraficoColunaConfig
-from .enums.diaMais import DiaMais
-from .enums.respostaFormato import RespostaFormato
-from .enums.pesquisaSimplesOpcoes import PesquisaSimplesOpcoes
-from .enums.pesquisaDiaMaisOpcoes import PesquisaDiaMaisOpcoes
+from .parametros.respostaFormato import RespostaFormato
+from .parametros.pesquisaSimplesOpcoes import PesquisaSimplesOpcoes
+from .parametros.pesquisaDiaMaisOpcoes import PesquisaDiaMaisOpcoes
 

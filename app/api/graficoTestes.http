@@ -1,0 +1,27 @@
+
+
+
+
+
+
+### pesquisa simples
+http://127.0.0.1:8000/grafico/pesquisa-simples?estado=Santa%20Catarina&cidade=S%C3%A3o%20Jos%C3%A9&data_inicio=2023-01-01&data_fim=2023-12-31&coluna_climatica=chuva&dados_agrupados_por_x_dias=1&resposta_formato=objeto
+
+### pesquisa avancada
+http://127.0.0.1:8000/grafico/pesquisa-avancada?estado=Santa%20Catarina&cidade=S%C3%A3o%20Jos%C3%A9&data_inicio=2023-01-01&data_fim=2023-12-31&colunas=precipitacao&agrupamentos=sum_dia&hora_fixa=12&janela_hora_inicio=12&janela_hora_fim=17&dados_agrupados_por_x_dias=1&resposta_formato=objeto
+
+### dia mais
+http://127.0.0.1:8000/grafico/dia-mais?estado=Santa%20Catarina&cidade=S%C3%A3o%20Jos%C3%A9&data_inicio=2023-01-01&data_fim=2023-12-31&coluna_climatica=chuva&dias_marge=3&resposta_formato=objeto
+
+### estados
+http://127.0.0.1:8000/estados
+
+### cidades
+http://127.0.0.1:8000/cidades?estado=Acre
+
+### grafico
+http://127.0.0.1:8000/grafico?estado=Santa%20Catarina&cidade=S%C3%A3o%20Jos%C3%A9&data_inicio=2023-01-01&data_fim=2023-12-31&resposta_formato=objeto&colunas=precipitacao&dados_agrupados_por_x_dias=1&auto_completar_colunas=true
+
+
+
+
