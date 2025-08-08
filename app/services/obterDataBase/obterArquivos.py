@@ -15,6 +15,7 @@ from app.core.const.basePath import DOWNLOAD_DIR_BASE, EXTRACT_DIR_BASE
 from app.core.const.estadosCidades import ZIP_DIR, EXTRACT_DIR
 
 
+# verifica/ cria todo o data base
 def iniciar_arquivos():
     start = time.time()
     

@@ -6,7 +6,9 @@ from app.core.const.estadosCidades import PARQUET_FILE_CIDADES_ESTADOS, COLUNA_E
 
 router = APIRouter()
 
-@router.get("/estados")
+@router.get("/estados",
+            summary= "Lista os estados Brasileiros", 
+            description= "Retorna uma lista dos estados Brasileiros")
 def obter_estados():
     df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS, columns=[COLUNA_ESTADO])
     estados = df[COLUNA_ESTADO].dropna().unique().tolist()

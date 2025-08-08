@@ -4,7 +4,7 @@ import zipfile
 import pandas as pd
 import geopandas as gpd
 
-# meus arquivos
+
 from app.core.const.estadosCidades import *
 
 

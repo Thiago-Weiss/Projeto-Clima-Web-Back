@@ -6,7 +6,7 @@ from app.core import EstacaoInfo, GraficoColunaConfig
 from app.services.graficos.utils import abrir_data_frame, filtrar_por_datas, agrupar_dados_do_dia
 
 
-
+# gera um dataframe do periodo inteiro de pesquisa e opcionalmente agrupa os dias para gerar menos pontos
 def gerar_data_frame(
         arquivos : list[EstacaoInfo],
         grafico_coluna_config : list[GraficoColunaConfig], 

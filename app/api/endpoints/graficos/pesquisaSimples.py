@@ -11,7 +11,9 @@ from app.core import Estados, PesquisaSimplesOpcoes, RespostaFormato
 
 router = APIRouter()
 
-@router.get("/grafico/pesquisa-simples")
+@router.get("/grafico/pesquisa-simples",
+            summary= "Grafico da pesquisa simples", 
+            description= "Gera um grafico com parametros definidos internamete para as variaveis climaticas e os modos de agrupamento delas")
 def get_pesquisa_simples(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),

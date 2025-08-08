@@ -7,7 +7,9 @@ from app.core import Estados
 
 router = APIRouter()
 
-@router.get("/cidades")
+@router.get("/cidades",            
+            summary= "Lista as cidades de um estado", 
+            description= "Retorna uma lista das cidades do estado informado")
 def obter_cidades_por_estado(estado: Estados = Query(...)):
 
     df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS, columns=[COLUNA_ESTADO, COLUNA_CIDADE])

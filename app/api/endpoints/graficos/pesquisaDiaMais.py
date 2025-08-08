@@ -10,7 +10,9 @@ from app.core import Estados, RespostaFormato, PesquisaDiaMaisOpcoes
 router = APIRouter()
 
 
-@router.get("/grafico/dia-mais")
+@router.get("/grafico/dia-mais",
+            summary= "Grafico do \"Dia Mais\"", 
+            description= "Gera um grafico do \"Dia Mais (exp: dia mais quente, dia mais frio, dia mais chuvoso)\" de um perio de tempo, se nao for informado o perido ele ira buscar em todos os anos disponiveis")
 def get_dia_mais(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),

@@ -3,6 +3,8 @@ from geopy.exc import GeocoderTimedOut, GeocoderServiceError
 from app.core.const.estadosCidades import *
 import pandas as pd
 
+
+# traduz a cidade e o estado para coordenadas geograficos, primeiro tenta localmente se nao conseguir usa uma api
 def obter_lat_lon(cidade: str, estado: str):
     # abre o arquivo
     df = pd.read_parquet(PARQUET_FILE_CIDADES_ESTADOS, columns= [COLUNA_ESTADO, COLUNA_CIDADE, LATITUDE, LONGITUDE])

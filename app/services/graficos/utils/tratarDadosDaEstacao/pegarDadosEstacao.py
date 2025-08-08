@@ -2,6 +2,9 @@ from app.core import EstacaoInfo
 from app.core.const.respostasFront import ESTACAO_NOME, ESTACAO_CODIGO, ANO_INICIO, ANO_FIM, LATITUDE, LONGITUDE, ALTITUDE
 
 
+
+# converte para o front os dados das estacoes usadas na pesquisa
+# como a estacao usada e dados sobre ela como nome localizacao e os dados de que anos foram usados 
 def pegar_dados_das_estacoes_pesquisadas(estacoes : list[EstacaoInfo]):
     dados = []
 

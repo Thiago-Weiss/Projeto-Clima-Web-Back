@@ -10,5 +10,7 @@ class FiltroGraficoAgrupamento(str, Enum):
     HORA_MIN_JANELA     = HORA_MIN_JANELA
     HORA_MAX_JANELA     = HORA_MAX_JANELA
     HORA_MEAN_JANELA    = HORA_MEAN_JANELA
-    VARIACAO            = VARIACAO
-    VARIACAO_JANELA     = VARIACAO_JANELA
+
+    # implementar as outras opcoes
+    #VARIACAO            = "variacao"
+    #VARIACAO_JANELA     = "variacao_janela" 

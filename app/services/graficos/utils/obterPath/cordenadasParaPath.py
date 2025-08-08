@@ -7,6 +7,8 @@ from app.services.graficos.utils import calcular_distancia_direcao, abrir_data_f
 from app.core import EstacaoInfo
 from app.core.const.basePath import BASE_DIR
 
+
+# retora os path dos arquivos com os dados climaticos, usa os arquivos de index para achar os paths
 def obter_paths_por_cord_ano(
         latitude : float,
         longitude : float, 

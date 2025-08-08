@@ -11,7 +11,9 @@ from app.core import Estados, ColunaClima, FiltroGraficoAgrupamento, RespostaFor
 
 router = APIRouter()
 
-@router.get("/grafico/pesquisa-avancada")
+@router.get("/grafico/pesquisa-avancada",
+            summary= "Grafico da pesquisa avançada", 
+            description= "Gerar um grafico de até 5 variavies climaticas podendo configurar o processamento interno das variaveis climaticas. exp: sum_dia ira somar todos os valores do dia para gerar um ponto no grafico, max_dia ira pegar o ponto de valor numerico maior para ser o ponto do dia")
 def get_pesquisa_avancada(
     estado: Estados     = Query(..., example= "Santa Catarina"),
     cidade: str         = Query(..., example= "São José"),

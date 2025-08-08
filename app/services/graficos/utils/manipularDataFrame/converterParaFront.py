@@ -21,11 +21,9 @@ def converter_para_o_front(df : pd.DataFrame, formato : RespostaFormato) -> list
     match formato:
         case RespostaFormato.LISTA:
             return [df.columns.tolist()] + df.values.tolist()
-
-        
+ 
         case RespostaFormato.OBJETO:
             return df.to_dict(orient="records")
 
-    
         case RespostaFormato.LISTA_ALTERNATIVA:
             return {col: df[col].tolist() for col in df.columns}

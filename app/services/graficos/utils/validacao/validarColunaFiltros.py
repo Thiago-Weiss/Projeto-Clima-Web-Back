@@ -1,5 +1,5 @@
 from app.core import  ColunaClima, FiltroGraficoAgrupamento, GraficoColunaConfig
-from app.core.const.filtroValoresPadrao import MODO_AGRUPAMENTO, HORA_FIXA, HORA_JANELA_INICIO, HORA_JANELA_FIM
+from app.core.const.pesquisaAvancadaConfig import MODO_AGRUPAMENTO, HORA_FIXA, HORA_JANELA_INICIO, HORA_JANELA_FIM
 
 
 def validar_grafico_coluna_config(
