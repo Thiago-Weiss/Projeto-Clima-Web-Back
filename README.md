@@ -19,6 +19,23 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 - ✅ **Pesquisa Avançada**  
   Gera um gráfico com até **5 variáveis climáticas**, permitindo configuração detalhada do processamento interno. [Detalhes completos aqui](#Agrupamento-dos-dados)
 
+---
+
+## 📖 Sobre o Projeto
+
+Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#⚙️-funcionamento-interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
+
+Porém, conversando com um amigo, percebemos que criar um **site** traria um alcance muito maior e tornaria o acesso mais simples — sem necessidade de instalar nada, apenas acessando via navegador. Assim, decidimos transformar a ideia em um projeto web: o **[Clima App](https://clima-front-theta.vercel.app/)**.
+
+### 🧩 Divisão de tarefas
+- **Eu**: Desenvolvimento do **back-end** e geração dos dados/gráficos.  
+- **Meu amigo**: Desenvolvimento do **front-end**.  
+- **Colaboração**: Como eu tive a ideia original e já havia começado a fazer o app, também participei da criação do layout do site, documentação do projeto, definição de funcionalidades e arquitetura geral.
+
+### 📅 Organização do projeto
+Para o planejamento e execução do projeto usamos:
+- **Notion** → Planejamento, documentação, cronogramas, divisão de tarefas e registro de ideias.
+- **Discord** → Comunicação (voz e chat).
 
 ---
 
