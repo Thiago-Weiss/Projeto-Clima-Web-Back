@@ -23,7 +23,7 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 
 ## 📖 Sobre o Projeto
 
-Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#⚙️-Funcionamento-Interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
+Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#Funcionamento-Interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
 
 Porém, conversando com um amigo, percebemos que criar um **site** traria um alcance muito maior e tornaria o acesso mais simples — sem necessidade de instalar nada, apenas acessando via navegador. Assim, decidimos transformar a ideia em um projeto web: o **[Clima App](https://clima-front-theta.vercel.app/)**.
 
@@ -57,7 +57,7 @@ app/
 ├── services/ # Serviços de gerar os "graficos" e funções auxiliares  
 └── requirements.txt # Dependências do projeto  
 
-## ⚙️ Funcionamento Interno
+## Funcionamento Interno
 
 A API utiliza dados de duas fontes principais:  
 
