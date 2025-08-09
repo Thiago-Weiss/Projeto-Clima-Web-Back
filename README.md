@@ -45,10 +45,10 @@ app/
 ![](img/docs.png)
 
 ### GET /grafico/pesquisa-simples
-![](img/pesquisa_simples.png) ![](img/pesquisa_simples_resposta.png)
+![](img/pesquisa_simples.png)
 
 ### GET /grafico/pesquisa-dia-mais
-![](img/pesquisa_dia_mais.png) ![](img/pesquisa_dia_mais_resposta.png)
+![](img/dia_mais.png)
 
 ---
 
