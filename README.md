@@ -52,6 +52,69 @@ app/
 
 ---
 
+## Origem dos Dados
+
+- Dados coletados do **Instituto Nacional de Meteorologia (INMET)** em formato tabular com 24 medições por dia do ano inteiro.
+- Período: **2000 até 08/2025**, possivel mente mais atualizados.  
+- Tratamento: remoção de valores impossíveis (chuva negativa, temperatura acima de 200°C, etc.).  
+- **Não** é feita previsão para dados faltantes.
+
+---
+## Variáveis Climáticas
+
+### 🌧 PRECIPITAÇÃO TOTAL, HORÁRIA (mm)  
+Quantidade de chuva medida no período de 1 hora, em milímetros.  
+
+### 🌬 PRESSÃO ATMOSFÉRICA AO NÍVEL DA ESTAÇÃO, HORÁRIA (mB ou hPa)
+Pressão do ar na altitude da estação.  
+
+### 📈 PRESSÃO ATMOSFÉRICA MÁX. NA HORA ANT. (mB)
+Maior pressão atmosférica registrada na hora anterior.
+
+### 📉 PRESSÃO ATMOSFÉRICA MÍN. NA HORA ANT. (mB)
+Menor pressão atmosférica registrada na hora anterior.
+
+### ☀ RADIAÇÃO GLOBAL (KJ/m²)
+Energia solar recebida por m² (em quilojoules).  
+
+### 🌡 TEMPERATURA DO AR – BULBO SECO, HORÁRIA (°C)
+Temperatura do ar no abrigo meteorológico.  
+
+### 💧 TEMPERATURA DO PONTO DE ORVALHO (°C)
+Temperatura em que o ar atinge 100% de umidade e o orvalho se forma.
+
+### 🌡 TEMPERATURA MÁXIMA NA HORA ANT. (°C)
+Maior temperatura registrada na hora anterior.
+
+### 🌡 TEMPERATURA MÍNIMA NA HORA ANT. (°C)
+Menor temperatura registrada na hora anterior.
+
+### 💧 TEMPERATURA ORVALHO MÁX. NA HORA ANT. (°C)
+Maior ponto de orvalho na hora anterior.
+
+### 💧 TEMPERATURA ORVALHO MÍN. NA HORA ANT. (°C)
+Menor ponto de orvalho na hora anterior.
+
+### 💧 UMIDADE REL. MÁX. NA HORA ANT. (%)
+Maior umidade relativa registrada na hora anterior.
+
+### 💧 UMIDADE REL. MÍN. NA HORA ANT. (%)
+Menor umidade relativa registrada na hora anterior.
+
+### 💧 UMIDADE RELATIVA DO AR, HORÁRIA (%)
+Percentual de umidade do ar no momento.
+
+### 🧭 VENTO, DIREÇÃO HORÁRIA (°)
+Direção de onde o vento vem (0°/360°=N, 90°=E, 180°=S, 270°=O).
+
+### 🌬 VENTO, RAJADA MÁXIMA (m/s)
+Velocidade da maior rajada na última hora.
+
+### 🌬 VENTO, VELOCIDADE HORÁRIA (m/s)
+Velocidade média do vento naquela hora.
+
+---
+
 ## Agrupamento dos dados
 
 - Por padrão, as pesquisas agrupam os dados **por dia**.  
