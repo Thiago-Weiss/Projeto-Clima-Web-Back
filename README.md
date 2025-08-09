@@ -40,6 +40,36 @@ app/
 ├── services/ # Serviços de gerar os "graficos" e funções auxiliares  
 └── requirements.txt # Dependências do projeto  
 
+## ⚙️ Funcionamento Interno
+
+A API utiliza dados de duas fontes principais:  
+
+- **INMET** — Dados climáticos históricos.  
+- **IBGE** — Dados sobre cidades, estados e coordenadas geográficas.  
+
+### 🗂 Preparação dos dados
+1. **Coleta**: Os dados são baixados do INMET e IBGE.  
+2. **Tratamento**: Todos os dados são processados e salvos em formato **`.parquet`**, o que garante maior velocidade em acessos futuros.  
+3. **Indexação**: Para os dados climáticos, é criado um **índice anual** para agilizar buscas posteriores.
+
+### 📍 Como funciona uma busca
+- Cada rota de gráfico recebe:
+  - **Cidade** e **Estado** → Convertidos para **coordenadas**.  
+  - **Período de tempo**
+
+> **Por que coordenadas?**  
+> As estações meteorológicas do INMET não utilizam cidade/estado nos dados originais — apenas coordenadas. Por isso, essa conversão é necessária.
+
+### 🔄 Processamento
+1. Localiza-se no índice os dados climáticos correspondentes às coordenadas e período informado.  
+2. Cria-se um **DataFrame único** com os dados encontrados.  
+3. Agrupamento **por dia** — as 24 medições diárias viram um único registro.  
+4. É feita uma análise de:
+   - **Dados faltantes**
+   - **Estações utilizadas**
+5. Tudo é retornado pela API no formato solicitado.
+
+---
 
 ## 📊 Rotas
 ![](img/docs.png)
