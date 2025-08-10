@@ -3,5 +3,5 @@ from fastapi import APIRouter
 router = APIRouter()
 
 @router.get("/acordar")
-def obter_cidades_por_estado():
+def acordar():
     return "só mais 5 min, mae"
