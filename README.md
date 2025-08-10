@@ -1,6 +1,6 @@
 # 📍 Brasil ClimaAPI
 
-**Brasil ClimaAPI** é uma API desenvolvida em **Python** utilizando **FastAPI** e **Pandas** que fornece dados climáticos históricos do Brasil. Site que usa ela [aqui](link para o front), ou se quiser acessar diretamente [interface da API](https://projeto-clima-web-back.onrender.com/docs) *(pode levar alguns segundos para o servidor iniciar)*.
+**Brasil ClimaAPI** é uma API desenvolvida em **Python** utilizando **FastAPI** e **Pandas** que fornece dados climáticos históricos do Brasil. Site que usa [Clima App](https://clima-front-theta.vercel.app/), ou se quiser acessar diretamente [interface da API](https://projeto-clima-web-back.onrender.com/docs) *(pode levar alguns segundos para o servidor iniciar)*.
 
 Com esta API, é possível obter dados reais e precisos para a geração de gráficos climáticos.
 
@@ -19,6 +19,23 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 - ✅ **Pesquisa Avançada**  
   Gera um gráfico com até **5 variáveis climáticas**, permitindo configuração detalhada do processamento interno. [Detalhes completos aqui](#Agrupamento-dos-dados)
 
+---
+
+## 📖 Sobre o Projeto
+
+Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#Funcionamento-Interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
+
+Porém, conversando com um amigo, percebemos que criar um **site** traria um alcance muito maior e tornaria o acesso mais simples — sem necessidade de instalar nada, apenas acessando via navegador. Assim, decidimos transformar a ideia em um projeto web: o **[Clima App](https://clima-front-theta.vercel.app/)**.
+
+### 🧩 Divisão de tarefas
+- **Eu**: Desenvolvimento do **back-end** e geração dos dados/gráficos.  
+- **Meu amigo**: Desenvolvimento do **front-end**.  
+- **Colaboração**: Como eu tive a ideia original e já havia começado a fazer o app, também participei da criação do layout do site, documentação do projeto, definição de funcionalidades e arquitetura geral.
+
+### 📅 Organização do projeto
+Para o planejamento e execução do projeto usamos:
+- **Notion** → Planejamento, documentação, cronogramas, divisão de tarefas e registro de ideias.
+- **Discord** → Comunicação (voz e chat).
 
 ---
 
@@ -40,6 +57,36 @@ app/
 ├── services/ # Serviços de gerar os "graficos" e funções auxiliares  
 └── requirements.txt # Dependências do projeto  
 
+## Funcionamento Interno
+
+A API utiliza dados de duas fontes principais:  
+
+- **INMET** — Dados climáticos históricos.  
+- **IBGE** — Dados sobre cidades, estados e coordenadas geográficas.  
+
+### 🗂 Preparação dos dados
+1. **Coleta**: Os dados são baixados do INMET e IBGE.  
+2. **Tratamento**: Todos os dados são processados e salvos em formato **`.parquet`**, o que garante maior velocidade em acessos futuros.  
+3. **Indexação**: Para os dados climáticos, é criado um **índice anual** para agilizar buscas posteriores.
+
+### 📍 Como funciona uma busca
+- Cada rota de gráfico recebe:
+  - **Cidade** e **Estado** → Convertidos para **coordenadas**.  
+  - **Período de tempo**
+
+> **Por que coordenadas?**  
+> As estações meteorológicas do INMET não utilizam cidade/estado nos dados originais — apenas coordenadas. Por isso, essa conversão é necessária.
+
+### 🔄 Processamento
+1. Localiza-se no índice os dados climáticos correspondentes às coordenadas e período informado.  
+2. Cria-se um **DataFrame único** com os dados encontrados.  
+3. Agrupamento **por dia** — as 24 medições diárias viram um único registro.  
+4. É feita uma análise de:
+   - **Dados faltantes**
+   - **Estações utilizadas**
+5. Tudo é retornado pela API no formato solicitado.
+
+---
 
 ## 📊 Rotas
 ![](img/docs.png)
