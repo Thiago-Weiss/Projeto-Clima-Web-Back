@@ -21,7 +21,7 @@ def get_dia_mais(
     
     coluna_climatica: PesquisaDiaMaisOpcoes = Query(description= "Nome da coluna a ser pesquisada"),
 
-    dias_marge : int = Query(..., example= 3, description= "Quantos dias antes e depois do dia mais vai retornar junto", ge= 1, le= 7),
+    dias_marge : int = Query(default= 3, description= "Quantos dias antes e depois do dia mais vai retornar junto", ge= 1, le= 7),
     resposta_formato : RespostaFormato = Query(default="objeto", description= "Formatacao dos dados na resposta"),
 ):
     try:
