@@ -5,15 +5,17 @@
 Com esta API, é possível obter dados reais e precisos para a geração de gráficos climáticos.
 
 ---
-
-- [Princiapis rotas/funcionalidades](#Princiapis-rotas/funcionalidades)
+## Principais tópicos
 - [Sobre o projeto](#Sobre-o-Projeto)
 - [Divisão de tarefas](#Divisão-de-tarefas)
-- [Principais tecnologias utilizadas](#Principais-Tecnologias-utilizadas)
-- [Tecnologias e estrutura do projeto](#Principais-Tecnologias-utilizadas)
+- [Bibliotecas](#Bibliotecas)
+- [Estrutura do projeto](#Estrutura-do-projeto)
+- [Imagens](#Rotas-do-FastAPI-e-imagens-do-site)
+- [Variáveis Climáticas](#Variáveis Climáticas)
+- [Como rodar o projeto localmente](#Como-rodar-o-projeto-localmente)
 
 
-
+Estrutura do projeto
 ---
 
 ## Princiapis rotas/funcionalidades
@@ -30,7 +32,7 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 
 ---
 
-## Sobre o Projeto
+## Sobre o projeto
 
 Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#Funcionamento-Interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
 
@@ -48,12 +50,14 @@ Para o planejamento e execução do projeto usamos:
 
 ---
 
-## Principais Tecnologias utilizadas e estrutura do projeto
+## Bibliotecas
 
 - [Python] Linguagem de programaçao
 - [FastAPI] Fazer o Back End
 - [Pandas] Trabalhar com os dados
 - [Uvicorn] para rodar o servidor
+
+---
 
 ## Estrutura do projeto
 app/  
@@ -71,12 +75,12 @@ A API utiliza dados de duas fontes principais:
 - **INMET** — Dados climáticos históricos.  
 - **IBGE** — Dados sobre cidades, estados e coordenadas geográficas.  
 
-### 🗂 Preparação dos dados
+### Preparação dos dados
 1. **Coleta**: Os dados são baixados do INMET e IBGE.  
 2. **Tratamento**: Todos os dados são processados e salvos em formato **`.parquet`**, o que garante maior velocidade em acessos futuros.  
 3. **Indexação**: Para os dados climáticos, é criado um **índice anual** para agilizar buscas posteriores.
 
-### 📍 Como funciona uma busca
+### Como funciona uma busca
 - Cada rota de gráfico recebe:
   - **Cidade** e **Estado** → Convertidos para **coordenadas**.  
   - **Período de tempo**
@@ -84,7 +88,7 @@ A API utiliza dados de duas fontes principais:
 > **Por que coordenadas?**  
 > As estações meteorológicas do INMET não utilizam cidade/estado nos dados originais — apenas coordenadas. Por isso, essa conversão é necessária.
 
-### 🔄 Processamento
+### Processamento
 1. Localiza-se no índice os dados climáticos correspondentes às coordenadas e período informado.  
 2. Cria-se um **DataFrame único** com os dados encontrados.  
 3. Agrupamento **por dia** — as 24 medições diárias viram um único registro.  
@@ -95,7 +99,7 @@ A API utiliza dados de duas fontes principais:
 
 ---
 
-## 📊 Rotas do FastAPI e imagens do site
+## Rotas do FastAPI e imagens do site
 ![](img/docs.png)
 ![](img/home.png)
 ### GET /grafico/pesquisa-simples
@@ -195,7 +199,7 @@ Alguns filtros precisam de **parâmetros adicionais**:
 
 ---
 
-## ▶️ Como rodar o projeto localmente
+## Como rodar o projeto localmente
 
 Clone o repositório
 ```bash
@@ -224,6 +228,6 @@ http://127.0.0.1:8000/docs
 
 
 
-📜 Licença
+Licença
 Este projeto está sob a licença MIT. Você pode usá-lo, modificá-lo e distribuí-lo livremente.
 
