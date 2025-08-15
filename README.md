@@ -1,13 +1,22 @@
-# 📍 Brasil ClimaAPI
+# Brasil ClimaAPI
 
 **Brasil ClimaAPI** é uma API desenvolvida em **Python** utilizando **FastAPI** e **Pandas** que fornece dados climáticos históricos do Brasil. Site que usa [Clima App](https://clima-front-theta.vercel.app/), ou se quiser acessar diretamente [interface da API](https://projeto-clima-web-back.onrender.com/docs) *(pode levar alguns segundos para o servidor iniciar)*.
 
 Com esta API, é possível obter dados reais e precisos para a geração de gráficos climáticos.
 
+---
+
+- [Princiapis rotas/funcionalidades](#Princiapis-rotas/funcionalidades)
+- [Sobre o projeto](#Sobre-o-Projeto)
+- [Divisão de tarefas](#Divisão-de-tarefas)
+- [Principais tecnologias utilizadas](#Principais-Tecnologias-utilizadas)
+- [Tecnologias e estrutura do projeto](#Principais-Tecnologias-utilizadas)
+
+
 
 ---
 
-## Princiapis rotas /Funcionalidades
+## Princiapis rotas/funcionalidades
 
 - ✅ **Pesquisa Simples**  
   Gera um gráfico com parâmetros predefinidos para variáveis climáticas e modos de agrupamento.
@@ -21,34 +30,32 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 
 ---
 
-## 📖 Sobre o Projeto
+## Sobre o Projeto
 
 Este projeto surgiu de uma ideia minha de criar um aplicativo para visualizar dados climáticos. Inicialmente, eu havia projetado toda a [estrutura e processamento dos dados](#Funcionamento-Interno) para ser usada em um **app Python** com interface gráfica feita com a biblioteca **Tkinter**.
 
 Porém, conversando com um amigo, percebemos que criar um **site** traria um alcance muito maior e tornaria o acesso mais simples — sem necessidade de instalar nada, apenas acessando via navegador. Assim, decidimos transformar a ideia em um projeto web: o **[Clima App](https://clima-front-theta.vercel.app/)**.
 
-### 🧩 Divisão de tarefas
+### Divisão de tarefas
 - **Eu**: Desenvolvimento do **back-end** e geração dos dados/gráficos.  
 - **Meu amigo**: Desenvolvimento do **front-end**.  
 - **Colaboração**: Como eu tive a ideia original e já havia começado a fazer o app, também participei da criação do layout do site, documentação do projeto, definição de funcionalidades e arquitetura geral.
 
-### 📅 Organização do projeto
+### Organização do projeto
 Para o planejamento e execução do projeto usamos:
 - **Notion** → Planejamento, documentação, cronogramas, divisão de tarefas e registro de ideias.
 - **Discord** → Comunicação (voz e chat).
 
 ---
 
-## 🛠️ Principais Tecnologias utilizadas
+## Principais Tecnologias utilizadas e estrutura do projeto
 
 - [Python] Linguagem de programaçao
 - [FastAPI] Fazer o Back End
 - [Pandas] Trabalhar com os dados
 - [Uvicorn] para rodar o servidor
 
----
-
-## 📂 Estrutura do projeto
+## Estrutura do projeto
 app/  
 ├── main.py # Inicializa a API FastAPI  
 ├── api/ # Rotas da API  
@@ -88,15 +95,16 @@ A API utiliza dados de duas fontes principais:
 
 ---
 
-## 📊 Rotas
+## 📊 Rotas do FastAPI e imagens do site
 ![](img/docs.png)
-
+![](img/home.png)
 ### GET /grafico/pesquisa-simples
 ![](img/pesquisa_simples.png)
+![](img/chuva.png)
 
 ### GET /grafico/pesquisa-dia-mais
 ![](img/dia_mais.png)
-
+![](img/temperatura.png)
 ---
 
 ## Origem dos Dados
