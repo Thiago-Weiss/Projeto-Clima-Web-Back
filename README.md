@@ -5,6 +5,7 @@
 Com esta API, é possível obter dados reais e precisos para a geração de gráficos climáticos.
 
 ---
+
 ## Principais tópicos
 - [Sobre o projeto](#Sobre-o-Projeto)
 - [Divisão de tarefas](#Divisão-de-tarefas)
@@ -14,8 +15,6 @@ Com esta API, é possível obter dados reais e precisos para a geração de grá
 - [Variáveis Climáticas](#Variáveis-Climáticas)
 - [Como rodar o projeto localmente](#Como-rodar-o-projeto-localmente)
 
-
-Estrutura do projeto
 ---
 
 ## Princiapis rotas/funcionalidades
@@ -109,6 +108,7 @@ A API utiliza dados de duas fontes principais:
 ### GET /grafico/pesquisa-dia-mais
 ![](img/dia_mais.png)
 ![](img/temperatura.png)
+
 ---
 
 ## Origem dos Dados
